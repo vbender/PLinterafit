@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial &mdash; PLinterafit 0.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PLinterafit" href="modules.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#calling-run-one-voigt-fitting-function">Calling ‘run_one_voigt_fitting’ function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calling-run-five-voigt-fitting-function">Calling ‘run_five_voigt_fitting’ function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customization">Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-your-own-data-file">Using your own data file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-or-removing-more-voigt-functions">Adding or removing more Voigt functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">PLinterafit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h1>
+<p>Here, we briefly describe the usage of PLinterafit package. The tutorial will be structured in a way that you try first the given version with the given data so that you can judge if the PLinterafit
+is suitable for you. In the end, we comment on how you can adapt for your own personal use.</p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
+<section id="calling-run-one-voigt-fitting-function">
+<h3>Calling ‘run_one_voigt_fitting’ function<a class="headerlink" href="#calling-run-one-voigt-fitting-function" title="Permalink to this heading"></a></h3>
+<p>Import the relevant functions from PLinterafit package in the ‘main.py’. An example is shown below.</p>
+<a class="reference internal image-reference" href="_images/main_py_import_and_call.png"><img alt="alternate text" src="_images/main_py_import_and_call.png" style="width: 485px; height: 377px;" /></a>
+<p>You can now simply compile the file. If successful, it will produce a figure with the respective interactive slides like the following.</p>
+<a class="reference internal image-reference" href="_images/one_voigt_interactive_slider_figure.png"><img alt="alternate text" src="_images/one_voigt_interactive_slider_figure.png" style="width: 592px; height: 655px;" /></a>
+<p>You can play with the sliders and obtain the best possible seed values for the next curve fitting step. The result may look like as follows.</p>
+<a class="reference internal image-reference" href="_images/one_voigt_interactive_slider_adjusted.png"><img alt="alternate text" src="_images/one_voigt_interactive_slider_adjusted.png" style="width: 591px; height: 653px;" /></a>
+<p>If you are satisfied with your adjusted seed values for the Voigt function, you can proceed to the next step of statistical analysis by pressing the button “Go to next step”. If the seed value was good, and
+the aimed statistical percision has reached (it is set to <span class="math notranslate nohighlight">\(10^{-20}\)</span> in the function ‘prepare_data_for_stat_test’), it will produce a figure like the following.</p>
+<a class="reference internal image-reference" href="_images/one_voigt_statistical_analysis.png"><img alt="alternate text" src="_images/one_voigt_statistical_analysis.png" style="width: 594px; height: 657px;" /></a>
+<p>If you are not satisfied with the obtained goodness of fit for your fitting, you may close this figure with statistical analysis and go back and repeat the adjustment process in the first figure with interactive sliders.
+You can refine the parameters as many times as you want.</p>
+<p>The optimized fit parameters for the Voigt function and the goodness of fit are printed in the console as follows.</p>
+<a class="reference internal image-reference" href="_images/fit_results_one_voigt.png"><img alt="alternate text" src="_images/fit_results_one_voigt.png" style="width: 325px; height: 192px;" /></a>
+<p>You should aim to achieve <span class="math notranslate nohighlight">\(\chi^2/\)</span> ndof and p-value close to 1 where ndof refers to the degree of
+freedom. Note that we only take into account for the underlying noise distribution of ‘poissonian’ or ‘gaussian’ in the statistical analysis.
+However, there might also exist some other fluctuations in the data; like in this case, there is an underlying interference oscillation in the data. Therefore, statistical results are not perfect in terms of <span class="math notranslate nohighlight">\(\chi^2/\)</span> ndof and p-value.
+In such case, the residue graph can assist you on assessing the quality of fit. In case of only one Voigt fitting, all statistical indicators suggest that the fitting is not good, and one should include
+more Voigt functions!</p>
+</section>
+<section id="calling-run-five-voigt-fitting-function">
+<h3>Calling ‘run_five_voigt_fitting’ function<a class="headerlink" href="#calling-run-five-voigt-fitting-function" title="Permalink to this heading"></a></h3>
+<p>You may also call the ‘run_five_voigt_fitting’ to fit five Voigt functions to the measured spectrum. Like before, it will produce a figure with the respective interactive slides like the following.</p>
+<a class="reference internal image-reference" href="_images/five_voigt_interactive_slider_adjusted.png"><img alt="alternate text" src="_images/five_voigt_interactive_slider_adjusted.png" style="width: 594px; height: 660px;" /></a>
+<p>Again, you can proceed to the next step of statistical analysis by pressing the button “Go to the next step”.
+If the seed values were good, and the aimed statistical percision has reached, it will produce a figure like the following.</p>
+<a class="reference internal image-reference" href="_images/five_voigt_statistical_analysis.png"><img alt="alternate text" src="_images/five_voigt_statistical_analysis.png" style="width: 596px; height: 659px;" /></a>
+<p>The optimized fit parameters of all five Voigt functions and the goodness of fit are printed in console as follows.</p>
+<a class="reference internal image-reference" href="_images/fit_results_five_voigt.png"><img alt="alternate text" src="_images/fit_results_five_voigt.png" style="width: 323px; height: 300px;" /></a>
+<p>You may close the figure with statistical analysis and repeat the seed value adjustment as many times as you want if you are unsatisfied with your curve fitting optimization.</p>
+</section>
+</section>
+<section id="customization">
+<h2>Customization<a class="headerlink" href="#customization" title="Permalink to this heading"></a></h2>
+<section id="using-your-own-data-file">
+<h3>Using your own data file<a class="headerlink" href="#using-your-own-data-file" title="Permalink to this heading"></a></h3>
+<p>When you install PLinterafit package, it also loads as provided data ‘ExampleData_monolayerMoS2onSi02.asc’ and calls it in both functions for testing.
+You can see it in ‘run_one_voigt_fitting()’ function’s code shown below.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_one_voigt_fitting</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs a Voigt fitting on photoluminescence spectral data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: 0 on successful completion of function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Importing data and preparing the data for analysis</span>
+    <span class="c1"># Data has the first column as wavelengths in nanometers and the second column as photon counts</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s1">&#39;example_data/ExampleData_monolayerMoS2onSi02.asc&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">get_fit_data</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">)</span>
+    <span class="n">plotData1</span> <span class="o">=</span> <span class="n">data1</span>
+
+    <span class="c1"># Example of calling fit_one_voigt function</span>
+    <span class="c1"># We pass the data, initial values for the Voigt function, and the underlying noise distribution type</span>
+    <span class="n">fit_one_voigt</span><span class="p">(</span><span class="n">plotData1</span><span class="p">,</span> <span class="n">median</span><span class="o">=</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">gaussian_hwhm</span><span class="o">=</span><span class="mf">.035</span><span class="p">,</span>
+                              <span class="n">offset</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;poisson&quot;</span><span class="p">)</span>
+
+     <span class="k">return</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If you want to use your own data for the fitting and the statistical analysis, you may edit the file path in either ‘run_one_voigt_fitting()’ function or ‘run_five_voigt_fitting()’ function
+in ‘analysis’ module. You can also change the initial seed values of the Voigt functions here.</p>
+</section>
+<section id="adding-or-removing-more-voigt-functions">
+<h3>Adding or removing more Voigt functions<a class="headerlink" href="#adding-or-removing-more-voigt-functions" title="Permalink to this heading"></a></h3>
+<p>In ‘PLinterafit’ package, we only provided as an example two versions of Voigt function fitting: with one or with five Voigt functions. You may easily customize the package by removing or adding one or more Voigt functions
+to suit your need. We recommend you to take example from the five Voigt function fitting and modify the functions in the following modules:</p>
+<ul class="simple">
+<li><p>analysis</p></li>
+<li><p>fitting</p></li>
+<li><p>plotting</p></li>
+<li><p>dataPreparation</p></li>
+<li><p>models</p></li>
+</ul>
+<p>Let’s assume that you want to fit three Voigt function to your data. You can copy and paste all functions that are relevant to the five Voigt function fitting and then modify them.</p>
+<ol class="arabic">
+<li><p>Create ‘run_three_voigt_fitting()’ function in ‘analysis’ module and modify the content accordingly (assuming you copy-pasted ‘run_five_voigt_fitting()’ function)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>call fit_three_voigts(…) instead of fit_five_voigts(…)</p></li>
+<li><p>reduce the number of initial seed values</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Create ‘fit_three_voigts()’ function in ‘fitting’ module and modify the content accordingly.</p>
+<blockquote>
+<div><ul>
+<li><p>edit the input parameter list</p></li>
+<li><p>modify ‘update()’ function</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>reduce the updated y-axes of graphs in the figure</p></li>
+<li><p>reduce the parameters in ‘seed’ list</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>modify ‘do_statistical_analysis()’ function</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>call ‘plot_fitted_results_three_voigt()’ function</p></li>
+<li><p>reduce the printed result lines</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>change the name of the function ‘func’ to ‘three_voigt’</p></li>
+<li><p>‘seed’ list should be changed</p></li>
+<li><p>call ‘plot_data_and_three_voigt_seed_function()’ to acquire Figure and Axes object handles</p></li>
+<li><p>reduce the number of ‘compX_line’ that plots the different Voigt functions</p></li>
+<li><p>reduce the number of sliders</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Create ‘plot_fitted_results_three_voigt()’ and ‘plot_data_and_three_voigt_seed_function()’ in the ‘plotting’ module. Of course, reduce the number of Voigt functions that are plotted.</p></li>
+<li><p>Modify ‘prepare_data_for_stat_test()’ function in ‘dataPreparation’ module</p>
+<blockquote>
+<div><ul>
+<li><p>reconfigure the normalization of Voigt functions for the statistical test which is written as</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/statistical_test_normalization.png"><img alt="alternate text" src="_images/statistical_test_normalization.png" style="width: 350px; height: 160px;" /></a>
+</div></blockquote>
+<p>by adding the following two lines</p>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">elif</span> <span class="n">function_name</span> <span class="o">==</span> <span class="n">three_voigt</span><span class="p">:</span>
+  <span class="n">idx_to_correct</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Create ‘three_voigt()’ function by taking example from ‘five_voigt()’ function in ‘models’ module.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>reduce the number of input parameters</p></li>
+<li><p>reduce the number of Voigt component added in the return value</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Lastly, you should modify the ‘main.py’ to call the right function.</p></li>
+</ol>
+<p>Have fun!</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="PLinterafit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLinterafit.fitting &mdash; PLinterafit 0.0.1 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../contents.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">PLinterafit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../contents.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../contents.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PLinterafit.fitting</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for PLinterafit.fitting</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Authors: Viktor Bender and Bayarjargal N.Tugchin</span>
+<span class="c1"># Date: 16/03/2023</span>
+<span class="c1"># Last update: 01/04/2023</span>
+
+
+<span class="kn">from</span> <span class="nn">PLinterafit.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.statistics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.dataPreparation</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.plotting</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">leastsq</span><span class="p">,</span> <span class="n">curve_fit</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">from</span> <span class="nn">matplotlib.widgets</span> <span class="kn">import</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">Button</span>
+<span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">FixedLocator</span>
+
+
+
+<span class="c1"># Error will be raised if the number of calls of &#39;curve_fit&#39; has been reached</span>
+<span class="n">My_maxfav</span> <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="n">hc</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">physical_constants</span><span class="p">[</span><span class="s1">&#39;Planck constant in eV s&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> \
+     <span class="n">constants</span><span class="o">.</span><span class="n">physical_constants</span><span class="p">[</span><span class="s1">&#39;speed of light in vacuum&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span>
+
+
+<div class="viewcode-block" id="create_slider"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.fitting.create_slider">[docs]</a><span class="k">def</span> <span class="nf">create_slider</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">valmin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">valmax</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">valinit</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Slider</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a slider widget with the given minimum, maximum, and initial values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ax: axes</span>
+<span class="sd">            The axes object on which to create the slider.</span>
+<span class="sd">        label: str</span>
+<span class="sd">            The label for the slider.</span>
+<span class="sd">        valmin: float</span>
+<span class="sd">            The minimum value of the slider.</span>
+<span class="sd">        valmax: float</span>
+<span class="sd">            The maximum value of the slider.</span>
+<span class="sd">        valinit: float</span>
+<span class="sd">            The initial value of the slider.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        slider: Slider</span>
+<span class="sd">            The created slider widget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">slider</span> <span class="o">=</span> <span class="n">Slider</span><span class="p">(</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+        <span class="n">valmin</span><span class="o">=</span><span class="n">valmin</span><span class="p">,</span>
+        <span class="n">valmax</span><span class="o">=</span><span class="n">valmax</span><span class="p">,</span>
+        <span class="n">valinit</span><span class="o">=</span><span class="n">valinit</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">_silderRef</span> <span class="o">=</span> <span class="n">slider</span>
+    <span class="k">return</span> <span class="n">slider</span></div>
+
+<div class="viewcode-block" id="create_button"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.fitting.create_button">[docs]</a><span class="k">def</span> <span class="nf">create_button</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">Button</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a button widget with the given label.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ax: axes</span>
+<span class="sd">            The axes object on which to create the button.</span>
+<span class="sd">        label: str</span>
+<span class="sd">            The label for the button.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        button: Button</span>
+<span class="sd">            The created button widget.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">_buttonRef</span> <span class="o">=</span> <span class="n">button</span>
+    <span class="k">return</span> <span class="n">button</span></div>
+
+<div class="viewcode-block" id="create_slider_group_voigt"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.fitting.create_slider_group_voigt">[docs]</a><span class="k">def</span> <span class="nf">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed_temp</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">voigt_order</span><span class="p">,</span> <span class="n">position_yaxis0</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a group of four sliders for a Voigt profile with the given seed values as seed_temp.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fig: figure </span>
+<span class="sd">            The figure object on which to create the slider group.</span>
+<span class="sd">        seed_temp: list</span>
+<span class="sd">            A list of four float values representing the seed values for the Voigt profile.</span>
+<span class="sd">        update: function</span>
+<span class="sd">            The function to call when any slider in the group is changed.</span>
+<span class="sd">        voigt_order: int</span>
+<span class="sd">            The order of the Voigt profile.</span>
+<span class="sd">        position_yaxis0: float</span>
+<span class="sd">            The y-axis position of the top slider in the group.</span>
+<span class="sd">        slider_thickness: float </span>
+<span class="sd">            Thickness of the sliders.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple of four Slider objects representing the median, amplitude, Lorenzian half-width at half-maximum (HWHM),</span>
+<span class="sd">            and Gaussian HWHM of the Voigt profile, respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Creating labels for sliders</span>
+    <span class="n">label_median</span> <span class="o">=</span> <span class="s1">&#39;median &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">voigt_order</span><span class="p">)</span>
+    <span class="n">label_amplitude</span> <span class="o">=</span> <span class="s1">&#39;amplitude &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">voigt_order</span><span class="p">)</span>
+    <span class="n">label_lorenzian</span> <span class="o">=</span> <span class="s1">&#39;Lorenzian HWHM &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">voigt_order</span><span class="p">)</span>
+    <span class="n">label_gaussian</span> <span class="o">=</span> <span class="s1">&#39;Gaussian HWHM &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">voigt_order</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Creating sliders at given position</span>
+    <span class="n">med_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">position_yaxis0</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span>  <span class="n">slider_thickness</span><span class="p">])</span>
+    <span class="c1"># median can be adjusted between 1.5 to 2.5</span>
+    <span class="n">med_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span><span class="n">med_ax</span><span class="p">,</span> <span class="n">label_median</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">seed_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">amp_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">position_yaxis0</span> <span class="o">-</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">])</span>
+    <span class="c1"># amplitude can be adjusted between 0 to 2000</span>
+    <span class="n">amp_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span><span class="n">amp_ax</span><span class="p">,</span> <span class="n">label_amplitude</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">seed_temp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">lor_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">position_yaxis0</span> <span class="o">-</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">])</span>
+    <span class="c1"># lorenzian hwhm can be adjusted between 0 to 0.5</span>
+    <span class="n">lor_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span><span class="n">lor_ax</span><span class="p">,</span> <span class="n">label_lorenzian</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">seed_temp</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="n">gaus_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">position_yaxis0</span> <span class="o">-</span> <span class="mf">0.06</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">])</span>
+    <span class="c1"># gaussian can be adjusted between 0 to 0.5</span>
+    <span class="n">gaus_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span><span class="n">gaus_ax</span><span class="p">,</span> <span class="n">label_gaussian</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">seed_temp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+    <span class="n">med_slider</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+    <span class="n">amp_slider</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+    <span class="n">lor_slider</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+    <span class="n">gaus_slider</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">med_slider</span><span class="p">,</span> <span class="n">amp_slider</span><span class="p">,</span> <span class="n">lor_slider</span><span class="p">,</span> <span class="n">gaus_slider</span></div>
+
+
+<div class="viewcode-block" id="fit_one_voigt"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.fitting.fit_one_voigt">[docs]</a><span class="k">def</span> <span class="nf">fit_one_voigt</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;poisson&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit a Voigt function to data using interactive sliders to adjust parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        data : np.array</span>
+<span class="sd">            The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains</span>
+<span class="sd">            the photon energy values and the second column contains the photon counts values.</span>
+<span class="sd">        median : float</span>
+<span class="sd">            The initial guess for the median of the Voigt function.</span>
+<span class="sd">        amplitude : float</span>
+<span class="sd">            The initial guess for the amplitude of the Voigt function.</span>
+<span class="sd">        lorentzian_hwhm : float</span>
+<span class="sd">            The initial guess for the half width of the Lorentzian component</span>
+<span class="sd">            of the Voigt function.</span>
+<span class="sd">        gaussian_hwhm : float</span>
+<span class="sd">            The initial guess for the half width of the Gaussian component</span>
+<span class="sd">            of the Voigt function.</span>
+<span class="sd">        offset : float, optional</span>
+<span class="sd">            The initial guess for the offset of the Voigt function. Defaults to 0.</span>
+<span class="sd">        mode : str</span>
+<span class="sd">            The mode of the underlying noise distribution in the data, either &quot;poisson&quot; or &quot;gauss&quot;. Defaults to &quot;poisson&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple containing the fit parameters (median, amplitude, lorentzian_width,</span>
+<span class="sd">            gaussian_width, offset), the standard errors of the fit parameters, the residuals,</span>
+<span class="sd">            and the chi-squared value.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># local functions</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">seed_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">offset_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">comp1_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+        
+        <span class="c1"># Update the seed array with the new slider values</span>
+        <span class="n">seed</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">med1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">offset_slider</span><span class="o">.</span><span class="n">val</span><span class="p">]</span>
+        
+    <span class="k">def</span> <span class="nf">do_statistical_analysis</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        
+        <span class="c1"># Curve fitting and doing statisctical analysis</span>
+        <span class="n">popt</span><span class="p">,</span> <span class="n">popt_std</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">ndof</span> <span class="o">=</span> <span class="n">do_statistics</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">My_maxfav</span><span class="p">)</span>
+
+        <span class="c1"># If successful, plot and print the results        </span>
+        <span class="n">plot_fitted_results_one_voigt</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">popt</span><span class="p">,</span> <span class="n">popt_std</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">ndof</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fit Results:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt Parameters: [median, amplitude, lorentzian_hwhm1, gaussian_hwhm]&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt 1: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Offset: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chi2/ndof: &quot;</span><span class="p">,</span> <span class="n">chi2</span><span class="o">/</span><span class="n">ndof</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p_value: &quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+        
+        <span class="k">return</span> 
+    
+    <span class="c1"># Renaming the imported data</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">one_voigt</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="p">[</span><span class="n">median</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="p">,</span> <span class="n">gaussian_hwhm</span><span class="p">,</span> <span class="n">offset</span><span class="p">]</span>
+    <span class="n">eV</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Plotting the measured data and fit using a Voigt function with initial seed values</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data_and_one_voigt_seed_function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>  
+    
+   
+    <span class="n">seed_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">comp1_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+    
+    <span class="c1"># Creating sliders for one Voigt function</span>
+    <span class="n">slider_thickness</span> <span class="o">=</span> <span class="mf">0.025</span>
+    <span class="n">med1_slider</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="p">,</span> <span class="n">gaus1_slider</span> <span class="o">=</span> <span class="n">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">)</span>
+    
+    <span class="c1"># Creating a slider for the offset adjustment</span>
+    <span class="n">offset_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.27</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">])</span>
+    <span class="c1"># Offset can be adjusted between 0 to 50</span>
+    <span class="n">offset_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span><span class="n">offset_ax</span><span class="p">,</span> <span class="s1">&#39;Offset&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">offset_slider</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Creating a button for the curve fitting once the adjusted seed values are deemed good  </span>
+    <span class="n">prpceed_Button_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+    <span class="n">proceed_Button</span> <span class="o">=</span> <span class="n">create_button</span><span class="p">(</span><span class="n">prpceed_Button_ax</span><span class="p">,</span> <span class="s2">&quot;Go to next step.&quot;</span><span class="p">)</span>
+    <span class="n">proceed_Button</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="n">do_statistical_analysis</span><span class="p">)</span>
+    
+
+    <span class="k">return</span></div>
+
+
+
+
+<div class="viewcode-block" id="fit_five_voigts"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.fitting.fit_five_voigts">[docs]</a><span class="k">def</span> <span class="nf">fit_five_voigts</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">median1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+                  <span class="n">median2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                  <span class="n">median3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
+                  <span class="n">median4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                  <span class="n">median5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;poisson&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit five Voigt functions to data using interactive sliders to adjust parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        data : np.array</span>
+<span class="sd">            The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains</span>
+<span class="sd">            the Photon energy values and the second column contains the Ph0ton counts values.</span>
+<span class="sd">        median1-5 : float</span>
+<span class="sd">            The initial guess for the median of each Voigt function 1-5.</span>
+<span class="sd">        amplitude1-5: float</span>
+<span class="sd">            The initial guess for the amplitude of each Voigt function 1-5.</span>
+<span class="sd">        lorentzian_hwhm1-5 : float</span>
+<span class="sd">            The initial guess for the half width of the Lorentzian component</span>
+<span class="sd">            of the Voigt function 1-5.</span>
+<span class="sd">        gaussian_hwhm1-5 : float</span>
+<span class="sd">            The initial guess for the half width of the Gaussian component</span>
+<span class="sd">            of each Voigt function 1-5.</span>
+<span class="sd">        offset : float, optional</span>
+<span class="sd">            The initial guess for the offset of each Voigt function. Defaults to 0.</span>
+<span class="sd">        mode : str</span>
+<span class="sd">            The mode of the underlying noise distribution in the data, either &quot;poisson&quot; or &quot;gauss&quot;. Defaults to &quot;poisson&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple</span>
+<span class="sd">            A tuple containing the fit parameters (median, amplitude, lorentzian_width,</span>
+<span class="sd">            gaussian_width, offset), the standard errors of the fit parameters, the residuals,</span>
+<span class="sd">            and the chi-squared value.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Local functions</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        
+        <span class="n">seed_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span>
+                                 <span class="n">med1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                                 <span class="n">med2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                                 <span class="n">med3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                                 <span class="n">med4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                                 <span class="n">med5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                                 <span class="n">offset_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">comp1_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">comp2_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">comp3_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">comp4_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+        <span class="n">comp5_line</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">med5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">))</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw_idle</span><span class="p">()</span>
+        
+        <span class="c1"># Update the seed array with the new slider values</span>
+        <span class="n">seed</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">med1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus1_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                   <span class="n">med2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus2_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                   <span class="n">med3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus3_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                   <span class="n">med4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus4_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                   <span class="n">med5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">amp5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">lor5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">gaus5_slider</span><span class="o">.</span><span class="n">val</span><span class="p">,</span>
+                   <span class="n">offset_slider</span><span class="o">.</span><span class="n">val</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">do_statistical_analysis</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        
+        <span class="c1"># Curve fitting and doing statisctical analysis</span>
+        <span class="n">popt</span><span class="p">,</span> <span class="n">popt_std</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">ndof</span> <span class="o">=</span> <span class="n">do_statistics</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">My_maxfav</span><span class="p">)</span>
+        
+        <span class="c1"># If successful, plot and print the results  </span>
+        <span class="n">plot_fitted_results_five_voigt</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">popt</span><span class="p">,</span> <span class="n">popt_std</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">ndof</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fit Results:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt Parameters: [median, amplitude, lorentzian_hwhm1, gaussian_hwhm]&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt 1: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt 2: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt 3: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt 4: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voigt 5: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Offset: &quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">20</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chi2/ndof: &quot;</span><span class="p">,</span> <span class="n">chi2</span><span class="o">/</span><span class="n">ndof</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p_value: &quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+        
+        <span class="k">return</span>
+    
+    <span class="c1"># Renaming the imported data</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">five_voigt</span>
+    <span class="c1"># seed = med1, amp1, lor1, gaus1, med2, amp2, lor2, gaus2, med3, amp3, lor3, gaus3, med4, amp4, lor4, gaus4, med5, amp5, lor5, gaus5, offset</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="p">[</span><span class="n">median1</span><span class="p">,</span> <span class="n">amplitude1</span><span class="p">,</span> <span class="n">lorentzian_hwhm1</span><span class="p">,</span> <span class="n">gaussian_hwhm1</span><span class="p">,</span> 
+            <span class="n">median2</span><span class="p">,</span> <span class="n">amplitude2</span><span class="p">,</span> <span class="n">lorentzian_hwhm2</span><span class="p">,</span> <span class="n">gaussian_hwhm2</span><span class="p">,</span>
+            <span class="n">median3</span><span class="p">,</span> <span class="n">amplitude3</span><span class="p">,</span> <span class="n">lorentzian_hwhm3</span><span class="p">,</span> <span class="n">gaussian_hwhm3</span><span class="p">,</span> 
+            <span class="n">median4</span><span class="p">,</span> <span class="n">amplitude4</span><span class="p">,</span> <span class="n">lorentzian_hwhm4</span><span class="p">,</span> <span class="n">gaussian_hwhm4</span><span class="p">,</span>
+            <span class="n">median5</span><span class="p">,</span> <span class="n">amplitude5</span><span class="p">,</span> <span class="n">lorentzian_hwhm5</span><span class="p">,</span> <span class="n">gaussian_hwhm5</span><span class="p">,</span> <span class="n">offset</span><span class="p">]</span>
+    <span class="n">eV</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Plotting the measured data and fit using 5 Voigt functions with initial seed values</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plot_data_and_five_voigt_seed_function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span>  
+
+    <span class="n">seed_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">comp1_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">comp2_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">comp3_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">comp4_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">4</span><span class="p">]</span>
+    <span class="n">comp5_line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">5</span><span class="p">]</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">.7</span><span class="p">)</span>
+
+    <span class="c1"># Creating sliders for 5 Voigt functions</span>
+    <span class="n">slider_thickness</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="n">med1_slider</span><span class="p">,</span> <span class="n">amp1_slider</span><span class="p">,</span> <span class="n">lor1_slider</span><span class="p">,</span> <span class="n">gaus1_slider</span> <span class="o">=</span> <span class="n">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">update</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">)</span>
+    <span class="n">med2_slider</span><span class="p">,</span> <span class="n">amp2_slider</span><span class="p">,</span> <span class="n">lor2_slider</span><span class="p">,</span> <span class="n">gaus2_slider</span> <span class="o">=</span> <span class="n">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">],</span> <span class="n">update</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.52</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">)</span>
+    <span class="n">med3_slider</span><span class="p">,</span> <span class="n">amp3_slider</span><span class="p">,</span> <span class="n">lor3_slider</span><span class="p">,</span> <span class="n">gaus3_slider</span> <span class="o">=</span> <span class="n">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">update</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">)</span>
+    <span class="n">med4_slider</span><span class="p">,</span> <span class="n">amp4_slider</span><span class="p">,</span> <span class="n">lor4_slider</span><span class="p">,</span> <span class="n">gaus4_slider</span> <span class="o">=</span> <span class="n">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">],</span> <span class="n">update</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.36</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">)</span>
+    <span class="n">med5_slider</span><span class="p">,</span> <span class="n">amp5_slider</span><span class="p">,</span> <span class="n">lor5_slider</span><span class="p">,</span> <span class="n">gaus5_slider</span> <span class="o">=</span> <span class="n">create_slider_group_voigt</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="mi">16</span><span class="p">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">update</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.28</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">)</span>
+    
+    <span class="c1"># Creating a slider for the offset adjustment</span>
+    <span class="n">offset_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="n">slider_thickness</span><span class="p">])</span>
+    <span class="c1"># Offset can be adjusted between 0 to 50</span>
+    <span class="n">offset_slider</span> <span class="o">=</span> <span class="n">create_slider</span><span class="p">(</span><span class="n">offset_ax</span><span class="p">,</span> <span class="s1">&#39;Offset&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">seed</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">offset_slider</span><span class="o">.</span><span class="n">on_changed</span><span class="p">(</span><span class="n">update</span><span class="p">)</span>
+    
+   
+    <span class="c1"># Creating a button for the curve fitting once the adjusted seed values are deemed good</span>
+    <span class="n">prpceed_Button_ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+    <span class="n">proceed_Button</span> <span class="o">=</span> <span class="n">create_button</span><span class="p">(</span><span class="n">prpceed_Button_ax</span><span class="p">,</span> <span class="s2">&quot;Go to next step.&quot;</span><span class="p">)</span>
+    <span class="n">proceed_Button</span><span class="o">.</span><span class="n">on_clicked</span><span class="p">(</span><span class="n">do_statistical_analysis</span><span class="p">)</span>
+     
+    
+   
+    <span class="k">return</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
