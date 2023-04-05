@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLinterafit.analysis &mdash; PLinterafit 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">PLinterafit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PLinterafit.analysis</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for PLinterafit.analysis</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Authors: Viktor Bender and Bayarjargal N.Tugchin</span>
+<span class="c1"># Date: 16/03/2023</span>
+<span class="c1"># Last update: 01/04/2023</span>
+
+<span class="kn">from</span> <span class="nn">PLinterafit.dataPreparation</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.statistics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.fitting</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.plotting</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.models</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="run_one_voigt_fitting"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.analysis.run_one_voigt_fitting">[docs]</a><span class="k">def</span> <span class="nf">run_one_voigt_fitting</span><span class="p">():</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs a Voigt fitting on photoluminescence spectral data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: 0 on successful completion of function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Importing data and preparing the data for analysis</span>
+    <span class="c1"># Data has the first column as wavelengths in nanometers and the second column as photon counts</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s1">&#39;example_data/ExampleData_monolayerMoS2onSi02.asc&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">get_fit_data</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">)</span>
+    <span class="n">plotData1</span> <span class="o">=</span> <span class="n">data1</span>
+    
+    <span class="c1"># Example of calling fit_one_voigt function</span>
+    <span class="c1"># We pass the data, initial values for the Voigt function, and the underlying noise distribution type</span>
+    <span class="n">fit_one_voigt</span><span class="p">(</span><span class="n">plotData1</span><span class="p">,</span> <span class="n">median</span><span class="o">=</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">gaussian_hwhm</span><span class="o">=</span><span class="mf">.035</span><span class="p">,</span>
+                              <span class="n">offset</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;poisson&quot;</span><span class="p">)</span>
+    
+ 
+
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="run_five_voigt_fitting"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.analysis.run_five_voigt_fitting">[docs]</a><span class="k">def</span> <span class="nf">run_five_voigt_fitting</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs five Voigt functions fitting on photoluminescence spectral data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: 0 on successful completion of function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Importing data and preparing the data for analysis</span>
+    <span class="c1"># Data has the first column as wavelengths in nanometers and the second column as photon counts</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s1">&#39;example_data/ExampleData_monolayerMoS2onSi02.asc&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">data1</span> <span class="o">=</span> <span class="n">get_fit_data</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.15</span><span class="p">)</span>
+    <span class="n">plotData1</span> <span class="o">=</span> <span class="n">data1</span>
+    
+
+    <span class="c1"># Example of calling fit_five_voigts function</span>
+    <span class="c1"># We pass the data, initial values for each Voigt function, and the underlying noise distribution type</span>
+    <span class="n">fit_five_voigts</span><span class="p">(</span><span class="n">plotData1</span><span class="p">,</span> <span class="n">median1</span><span class="o">=</span><span class="mf">2.033</span><span class="p">,</span> <span class="n">amplitude1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lorentzian_hwhm1</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">gaussian_hwhm1</span><span class="o">=</span><span class="mf">.035</span><span class="p">,</span> 
+                              <span class="n">median2</span><span class="o">=</span><span class="mf">1.89</span><span class="p">,</span> <span class="n">amplitude2</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">lorentzian_hwhm2</span><span class="o">=</span><span class="mf">.001</span><span class="p">,</span> <span class="n">gaussian_hwhm2</span><span class="o">=</span><span class="mf">.03</span><span class="p">,</span>
+                              <span class="n">median3</span><span class="o">=</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">amplitude3</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">lorentzian_hwhm3</span><span class="o">=</span><span class="mf">.0015</span><span class="p">,</span> <span class="n">gaussian_hwhm3</span><span class="o">=</span><span class="mf">.053</span><span class="p">,</span> 
+                              <span class="n">median4</span><span class="o">=</span><span class="mf">1.81</span><span class="p">,</span> <span class="n">amplitude4</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lorentzian_hwhm4</span><span class="o">=</span><span class="mf">5.56e-05</span><span class="p">,</span> <span class="n">gaussian_hwhm4</span><span class="o">=</span><span class="mf">.024</span><span class="p">,</span>
+                              <span class="n">median5</span><span class="o">=</span><span class="mf">1.63</span><span class="p">,</span> <span class="n">amplitude5</span><span class="o">=</span><span class="mf">4.2</span><span class="p">,</span> <span class="n">lorentzian_hwhm5</span><span class="o">=</span><span class="mf">.000007</span><span class="p">,</span> <span class="n">gaussian_hwhm5</span><span class="o">=</span><span class="mf">.036</span><span class="p">,</span> 
+                              <span class="n">offset</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;poisson&quot;</span><span class="p">)</span>
+
+
+
+    <span class="k">return</span> <span class="mi">0</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

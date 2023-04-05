@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLinterafit.statistics &mdash; PLinterafit 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">PLinterafit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PLinterafit.statistics</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for PLinterafit.statistics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Authors: Viktor Bender and Bayarjargal N.Tugchin</span>
+<span class="c1"># Date: 16/03/2023</span>
+<span class="c1"># Last update: 01/04/2023</span>
+
+<span class="kn">from</span> <span class="nn">PLinterafit.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.dataPreparation</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PLinterafit.plotting</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">leastsq</span><span class="p">,</span> <span class="n">curve_fit</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">from</span> <span class="nn">matplotlib.widgets</span> <span class="kn">import</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">Button</span>
+<span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">FixedLocator</span>
+
+
+<span class="n">hc</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">physical_constants</span><span class="p">[</span><span class="s1">&#39;Planck constant in eV s&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> \
+     <span class="n">constants</span><span class="o">.</span><span class="n">physical_constants</span><span class="p">[</span><span class="s1">&#39;speed of light in vacuum&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e9</span>
+
+<div class="viewcode-block" id="do_statistics"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.statistics.do_statistics">[docs]</a><span class="k">def</span> <span class="nf">do_statistics</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">seed</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">My_maxfav</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs statistical analysis on a given data set using the specified function and the mode of noise distribution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    -------</span>
+<span class="sd">        func: str</span>
+<span class="sd">            A callable function representing the fitting model.</span>
+<span class="sd">        eV: np.array</span>
+<span class="sd">            A numpy array containing the x-values of the data set.</span>
+<span class="sd">        observed: np.array</span>
+<span class="sd">            A numpy array containing the y-values of the observed data set.</span>
+<span class="sd">        seed: list</span>
+<span class="sd">            A list of four float values representing the seed values for the Voigt profile.</span>
+<span class="sd">        mode: str</span>
+<span class="sd">            A string specifying the mode of the underlying noise distribution of the data.</span>
+<span class="sd">        My_maxfav: int</span>
+<span class="sd">            An integer representing the maximum number of function evaluations for the fitting routine.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the chi-squared test statistic and p-value.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the mode of the underlying noise distribution neither &quot;poisson&quot; nor &quot;gauss&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;poisson&quot;</span><span class="p">:</span>
+        <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">observed</span><span class="p">),</span> <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">seed</span><span class="p">],</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxfev</span><span class="o">=</span><span class="n">My_maxfav</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;gauss&quot;</span><span class="p">:</span>
+        <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">seed</span><span class="p">],</span> <span class="n">maxfev</span><span class="o">=</span><span class="n">My_maxfav</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">observed</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">observed</span> <span class="o">-</span> <span class="n">func</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">))</span>
+        <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">,</span> <span class="n">observed</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">err</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">seed</span><span class="p">],</span> <span class="n">absolute_sigma</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">maxfev</span><span class="o">=</span><span class="n">My_maxfav</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You need to specify a valid mode in fitting: poisson or gauss&#39;</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">eV</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+
+    <span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">popt</span><span class="p">,</span> <span class="n">popt_std</span><span class="p">,</span> <span class="n">residuals</span> <span class="o">=</span> <span class="n">prepare_data_for_stat_test</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">eV</span><span class="p">)</span>
+    <span class="n">ndof</span> <span class="o">=</span> <span class="n">getNDOF</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">popt</span><span class="p">)</span>
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">compute_chisquare</span><span class="p">(</span><span class="n">observed</span><span class="o">=</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="o">=</span><span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="o">=</span><span class="n">uncertainty</span><span class="p">,</span> <span class="n">ndof</span><span class="o">=</span><span class="n">ndof</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">popt</span><span class="p">,</span> <span class="n">popt_std</span><span class="p">,</span> <span class="n">expected</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">ndof</span> </div>
+
+<div class="viewcode-block" id="compute_chisquare"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.statistics.compute_chisquare">[docs]</a><span class="k">def</span> <span class="nf">compute_chisquare</span><span class="p">(</span><span class="n">observed</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">expected</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">uncertainty</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">ndof</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the chi-squared test statistic and p-value given observed and expected values,</span>
+<span class="sd">    their uncertainties, and the number of degrees of freedom.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    -------</span>
+<span class="sd">        observed: array</span>
+<span class="sd">            Observed values.</span>
+<span class="sd">        expected: array</span>
+<span class="sd">            Expected values.</span>
+<span class="sd">        uncertainty: array</span>
+<span class="sd">            Uncertainties of observed values.</span>
+<span class="sd">        ndof: float</span>
+<span class="sd">            Degrees of freedom.</span>
+
+<span class="sd">    Returns: tuple</span>
+<span class="sd">        A tuple containing the chi-squared test statistic and p-value.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the shapes of the input arrays are not compatible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">observed</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span>
+    <span class="n">uncertainty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">uncertainty</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">observed</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">expected</span><span class="o">.</span><span class="n">shape</span> <span class="ow">or</span> <span class="n">observed</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">uncertainty</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Shapes of observed, expected, and uncertainty arrays are not compatible.&quot;</span><span class="p">)</span>
+    <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">observed</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">/</span> <span class="n">uncertainty</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="n">ndof</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">p_value</span></div>
+
+
+<div class="viewcode-block" id="getNDOF"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.statistics.getNDOF">[docs]</a><span class="k">def</span> <span class="nf">getNDOF</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">popt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the number of degrees of freedom given a data array and a parameter array.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    -------</span>
+<span class="sd">        data: array </span>
+<span class="sd">            Data array.</span>
+<span class="sd">        popt: array </span>
+<span class="sd">            Array of fitted parameter values.</span>
+
+<span class="sd">    Returns: float</span>
+<span class="sd">        Degrees of freedom.</span>
+<span class="sd">        </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the shapes of the input arrays are not compatible.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># data = np.asarray(data)</span>
+    <span class="c1"># popt = np.asarray(popt)</span>
+    <span class="c1"># if data.ndim != 1 or popt.ndim != 1 or data.shape != popt.shape:</span>
+    <span class="c1">#     raise ValueError(&quot;Shapes of data and popt arrays are not compatible.&quot;)</span>
+        
+        
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="n">popt</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLinterafit package &mdash; PLinterafit 0.0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="main module" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="contents.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">PLinterafit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PLinterafit package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.analysis">PLinterafit.analysis module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.dataPreparation">PLinterafit.dataPreparation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.fitting">PLinterafit.fitting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.models">PLinterafit.models module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.plotting">PLinterafit.plotting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.statistics">PLinterafit.statistics module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="contents.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">PLinterafit</a></li>
+      <li class="breadcrumb-item active">PLinterafit package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/PLinterafit.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="plinterafit-package">
+<h1>PLinterafit package<a class="headerlink" href="#plinterafit-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-PLinterafit.analysis">
+<span id="plinterafit-analysis-module"></span><h2>PLinterafit.analysis module<a class="headerlink" href="#module-PLinterafit.analysis" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="PLinterafit.analysis.run_five_voigt_fitting">
+<code class="descclassname">PLinterafit.analysis.</code><code class="descname">run_five_voigt_fitting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/analysis.html#run_five_voigt_fitting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.analysis.run_five_voigt_fitting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs five Voigt functions fitting on photoluminescence spectral data.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>int: 0 on successful completion of function.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.analysis.run_one_voigt_fitting">
+<code class="descclassname">PLinterafit.analysis.</code><code class="descname">run_one_voigt_fitting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/analysis.html#run_one_voigt_fitting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.analysis.run_one_voigt_fitting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a Voigt fitting on photoluminescence spectral data.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>int: 0 on successful completion of function.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PLinterafit.dataPreparation">
+<span id="plinterafit-datapreparation-module"></span><h2>PLinterafit.dataPreparation module<a class="headerlink" href="#module-PLinterafit.dataPreparation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.add_photon_energy">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">add_photon_energy</code><span class="sig-paren">(</span><em>data: numpy.ndarray</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#add_photon_energy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.add_photon_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add photon energy computed from vacuum wavelength.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array to be processed.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array with an additional dimension as photon energy.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.get_fit_data">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">get_fit_data</code><span class="sig-paren">(</span><em>data: numpy.ndarray</em>, <em>lower_cutoff: float</em>, <em>upper_cutoff: float</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#get_fit_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.get_fit_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return data within the interest range bound by lower_cutoff and upper_cutoff.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array of interest.</dd>
+<dt>lower_cutoff: float</dt>
+<dd>Lower cutoff range</dd>
+<dt>upper_cutoff: float</dt>
+<dd>Upper cutoff range</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array within the selected cutoff range.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.load_CSV_data">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">load_CSV_data</code><span class="sig-paren">(</span><em>datafile: str</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#load_CSV_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.load_CSV_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load CSV data and return numpy array.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>datafile: str</dt>
+<dd>File location is given as string.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array loaded from the file location.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.load_data">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">load_data</code><span class="sig-paren">(</span><em>filepath: str</em>, <em>background: float</em>, <em>normalisation: float</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#load_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.load_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load data files.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>filepath: str</dt>
+<dd>Filepath given as a string.</dd>
+<dt>background: float</dt>
+<dd>Background level to be removed from the data.</dd>
+<dt>normalisation: float</dt>
+<dd>Value by which the data is normalized with.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Processed data array: renormalized, background removed, new dimension is added as photon energy.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.normalise_data">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">normalise_data</code><span class="sig-paren">(</span><em>data: numpy.ndarray</em>, <em>factor: float</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#normalise_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.normalise_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalise data.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array to be normalized.</dd>
+<dt>factor: float</dt>
+<dd>Normalization factor.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Normalized data array.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.order_of_magnitude">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">order_of_magnitude</code><span class="sig-paren">(</span><em>number: float</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#order_of_magnitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.order_of_magnitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the order of magnitude of a given number.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>number: float</dt>
+<dd>The float value.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>integer: </dt>
+<dd>The order of magnituge.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.prepare_data_for_stat_test">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">prepare_data_for_stat_test</code><span class="sig-paren">(</span><em>observed: numpy.ndarray</em>, <em>expected: numpy.ndarray</em>, <em>popt: numpy.ndarray</em>, <em>pcov: numpy.ndarray</em>, <em>mode: str</em>, <em>function_name</em>, <em>eV: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#prepare_data_for_stat_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.prepare_data_for_stat_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare data for statistical test by normalizing expected counts, calculating uncertainties,
+and correcting parameters.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>observed: array </dt>
+<dd>Observed counts.</dd>
+<dt>expected: array</dt>
+<dd>Expected counts.</dd>
+<dt>popt: array</dt>
+<dd>Best-fit parameters.</dd>
+<dt>pcov: array</dt>
+<dd>Covariance matrix of popt.</dd>
+<dt>mode: str</dt>
+<dd>“poisson” or “gauss” mode.</dd>
+<dt>func: function</dt>
+<dd>Model function to use.</dd>
+<dt>eV: array</dt>
+<dd>Energy values.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>expected: array</dt>
+<dd>Normalized expected counts.</dd>
+<dt>uncertainty: array</dt>
+<dd>Uncertainties.</dd>
+<dt>popt: array</dt>
+<dd>Corrected best-fit parameters.</dd>
+<dt>popt_std: array</dt>
+<dd>Corrected standard deviations of popt.</dd>
+<dt>residuals: array</dt>
+<dd>Residuals.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>ValueError: </dt>
+<dd>If the mode is invalid.
+If the function_name is invalid.
+If the tolerance level has not reached the value atol.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.subtract_background">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">subtract_background</code><span class="sig-paren">(</span><em>data: numpy.ndarray</em>, <em>background: float</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#subtract_background"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.subtract_background" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtract background from data.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Data array to be processed.</dd>
+<dt>background: float</dt>
+<dd>Background to be removed.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array</dt>
+<dd>Background subtracted data array.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.dataPreparation.truncate">
+<code class="descclassname">PLinterafit.dataPreparation.</code><code class="descname">truncate</code><span class="sig-paren">(</span><em>number: float</em>, <em>decimals: int = 0</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#truncate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.dataPreparation.truncate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Truncates a float value to a specific number of decimal places.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>number: float</dt>
+<dd>The float value to truncate.</dd>
+<dt>decimals: int, optional</dt>
+<dd>The number of decimal places to keep. Defaults to 0.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>float: </dt>
+<dd>The truncated float value.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>TypeError: </dt>
+<dd>If the decimals argument is not an integer.</dd>
+<dt>ValueError: </dt>
+<dd>If the decimals argument is negative.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PLinterafit.fitting">
+<span id="plinterafit-fitting-module"></span><h2>PLinterafit.fitting module<a class="headerlink" href="#module-PLinterafit.fitting" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="PLinterafit.fitting.create_button">
+<code class="descclassname">PLinterafit.fitting.</code><code class="descname">create_button</code><span class="sig-paren">(</span><em>ax</em>, <em>label</em><span class="sig-paren">)</span> &#x2192; matplotlib.widgets.Button<a class="reference internal" href="_modules/PLinterafit/fitting.html#create_button"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.fitting.create_button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a button widget with the given label.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>ax: axes</dt>
+<dd>The axes object on which to create the button.</dd>
+<dt>label: str</dt>
+<dd>The label for the button.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>button: Button</dt>
+<dd>The created button widget.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.fitting.create_slider">
+<code class="descclassname">PLinterafit.fitting.</code><code class="descname">create_slider</code><span class="sig-paren">(</span><em>ax</em>, <em>label</em>, <em>valmin: float</em>, <em>valmax: float</em>, <em>valinit</em><span class="sig-paren">)</span> &#x2192; matplotlib.widgets.Slider<a class="reference internal" href="_modules/PLinterafit/fitting.html#create_slider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.fitting.create_slider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a slider widget with the given minimum, maximum, and initial values.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>ax: axes</dt>
+<dd>The axes object on which to create the slider.</dd>
+<dt>label: str</dt>
+<dd>The label for the slider.</dd>
+<dt>valmin: float</dt>
+<dd>The minimum value of the slider.</dd>
+<dt>valmax: float</dt>
+<dd>The maximum value of the slider.</dd>
+<dt>valinit: float</dt>
+<dd>The initial value of the slider.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>slider: Slider</dt>
+<dd>The created slider widget.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.fitting.create_slider_group_voigt">
+<code class="descclassname">PLinterafit.fitting.</code><code class="descname">create_slider_group_voigt</code><span class="sig-paren">(</span><em>fig</em>, <em>seed_temp</em>, <em>update</em>, <em>voigt_order</em>, <em>position_yaxis0</em>, <em>slider_thickness</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/fitting.html#create_slider_group_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.fitting.create_slider_group_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a group of four sliders for a Voigt profile with the given seed values as seed_temp.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>fig: figure </dt>
+<dd>The figure object on which to create the slider group.</dd>
+<dt>seed_temp: list</dt>
+<dd>A list of four float values representing the seed values for the Voigt profile.</dd>
+<dt>update: function</dt>
+<dd>The function to call when any slider in the group is changed.</dd>
+<dt>voigt_order: int</dt>
+<dd>The order of the Voigt profile.</dd>
+<dt>position_yaxis0: float</dt>
+<dd>The y-axis position of the top slider in the group.</dd>
+<dt>slider_thickness: float </dt>
+<dd>Thickness of the sliders.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>tuple</dt>
+<dd>A tuple of four Slider objects representing the median, amplitude, Lorenzian half-width at half-maximum (HWHM),
+and Gaussian HWHM of the Voigt profile, respectively.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.fitting.fit_five_voigts">
+<code class="descclassname">PLinterafit.fitting.</code><code class="descname">fit_five_voigts</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>median1: float</em>, <em>amplitude1: float</em>, <em>lorentzian_hwhm1: float</em>, <em>gaussian_hwhm1: float</em>, <em>median2: float</em>, <em>amplitude2: float</em>, <em>lorentzian_hwhm2: float</em>, <em>gaussian_hwhm2: float</em>, <em>median3: float</em>, <em>amplitude3: float</em>, <em>lorentzian_hwhm3: float</em>, <em>gaussian_hwhm3: float</em>, <em>median4: float</em>, <em>amplitude4: float</em>, <em>lorentzian_hwhm4: float</em>, <em>gaussian_hwhm4: float</em>, <em>median5: float</em>, <em>amplitude5: float</em>, <em>lorentzian_hwhm5: float</em>, <em>gaussian_hwhm5: float</em>, <em>offset: float = 0</em>, <em>mode: str = 'poisson'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/fitting.html#fit_five_voigts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.fitting.fit_five_voigts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit five Voigt functions to data using interactive sliders to adjust parameters.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">np.array</span></dt>
+<dd>The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains
+the Photon energy values and the second column contains the Ph0ton counts values.</dd>
+<dt>median1-5 <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the median of each Voigt function 1-5.</dd>
+<dt>amplitude1-5: float</dt>
+<dd>The initial guess for the amplitude of each Voigt function 1-5.</dd>
+<dt>lorentzian_hwhm1-5 <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the half width of the Lorentzian component
+of the Voigt function 1-5.</dd>
+<dt>gaussian_hwhm1-5 <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the half width of the Gaussian component
+of each Voigt function 1-5.</dd>
+<dt>offset <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>The initial guess for the offset of each Voigt function. Defaults to 0.</dd>
+<dt>mode <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The mode of the underlying noise distribution in the data, either “poisson” or “gauss”. Defaults to “poisson”.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>tuple</dt>
+<dd>A tuple containing the fit parameters (median, amplitude, lorentzian_width,
+gaussian_width, offset), the standard errors of the fit parameters, the residuals,
+and the chi-squared value.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.fitting.fit_one_voigt">
+<code class="descclassname">PLinterafit.fitting.</code><code class="descname">fit_one_voigt</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>median: float</em>, <em>amplitude: float</em>, <em>lorentzian_hwhm: float</em>, <em>gaussian_hwhm: float</em>, <em>offset: float = 0</em>, <em>mode: str = 'poisson'</em><span class="sig-paren">)</span> &#x2192; tuple<a class="reference internal" href="_modules/PLinterafit/fitting.html#fit_one_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.fitting.fit_one_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a Voigt function to data using interactive sliders to adjust parameters.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data <span class="classifier-delimiter">:</span> <span class="classifier">np.array</span></dt>
+<dd>The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains
+the photon energy values and the second column contains the photon counts values.</dd>
+<dt>median <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the median of the Voigt function.</dd>
+<dt>amplitude <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the amplitude of the Voigt function.</dd>
+<dt>lorentzian_hwhm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the half width of the Lorentzian component
+of the Voigt function.</dd>
+<dt>gaussian_hwhm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The initial guess for the half width of the Gaussian component
+of the Voigt function.</dd>
+<dt>offset <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>The initial guess for the offset of the Voigt function. Defaults to 0.</dd>
+<dt>mode <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>The mode of the underlying noise distribution in the data, either “poisson” or “gauss”. Defaults to “poisson”.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>tuple</dt>
+<dd>A tuple containing the fit parameters (median, amplitude, lorentzian_width,
+gaussian_width, offset), the standard errors of the fit parameters, the residuals,
+and the chi-squared value.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PLinterafit.models">
+<span id="plinterafit-models-module"></span><h2>PLinterafit.models module<a class="headerlink" href="#module-PLinterafit.models" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="PLinterafit.models.five_voigt">
+<code class="descclassname">PLinterafit.models.</code><code class="descname">five_voigt</code><span class="sig-paren">(</span><em>x: numpy.ndarray</em>, <em>median1: float</em>, <em>amplitude1: float</em>, <em>lorentzian_hwhm1: float</em>, <em>gaussian_hwhm1: float</em>, <em>median2: float</em>, <em>amplitude2: float</em>, <em>lorentzian_hwhm2: float</em>, <em>gaussian_hwhm2: float</em>, <em>median3: float</em>, <em>amplitude3: float</em>, <em>lorentzian_hwhm3: float</em>, <em>gaussian_hwhm3: float</em>, <em>median4: float</em>, <em>amplitude4: float</em>, <em>lorentzian_hwhm4: float</em>, <em>gaussian_hwhm4: float</em>, <em>median5: float</em>, <em>amplitude5: float</em>, <em>lorentzian_hwhm5: float</em>, <em>gaussian_hwhm5: float</em>, <em>offset: float = 0</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/models.html#five_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.models.five_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the line shape of five Voigt distributions at ‘x’.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">numpy.ndarray</span></dt>
+<dd>The x-coordinates at which to compute the Voigt line shape.</dd>
+<dt>median1-5: float</dt>
+<dd>The median (center) of respective Voigt line shape.</dd>
+<dt>amplitude1-5: float</dt>
+<dd>The normalisation of respective Voigt line shape.</dd>
+<dt>lorentzian_hwhm1-5: float</dt>
+<dd>The half-width at half-maximum (HWHM) of the Lorentzian component of respective Voigt line shape.</dd>
+<dt>gaussian_hwhm1-5: float</dt>
+<dd>The half-width at half-maximum (HWHM) of the Gaussian component of respective Voigt line shape.</dd>
+<dt>offset: float</dt>
+<dd>The offset value of the sum of five Voigt function. Defaults to 0.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>numpy.ndarray</dt>
+<dd>The line shape of five Voigt distributions at ‘x’.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.models.one_voigt">
+<code class="descclassname">PLinterafit.models.</code><code class="descname">one_voigt</code><span class="sig-paren">(</span><em>x: numpy.ndarray</em>, <em>median: float</em>, <em>amplitude: float</em>, <em>lorentzian_hwhm: float</em>, <em>gaussian_hwhm: float</em>, <em>offset: float = 0</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/models.html#one_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.models.one_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the line shape of a single Voigt distribution at ‘x’.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">numpy.ndarray</span></dt>
+<dd>The x-coordinates at which to compute the Voigt line shape.</dd>
+<dt>median <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The median (center) of the Voigt line shape.</dd>
+<dt>amplitude <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The normalisation of the Voigt line shape.</dd>
+<dt>lorentzian_hwhm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The half-width at half-maximum (HWHM) of the Lorentzian component of the Voigt line shape.</dd>
+<dt>gaussian_hwhm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.</dd>
+<dt>offset: float</dt>
+<dd>The offset value of the Voigt function. Defaults to 0.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>numpy.ndarray</dt>
+<dd>The Voigt line shape at ‘x’.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.models.voigt_multifit_component">
+<code class="descclassname">PLinterafit.models.</code><code class="descname">voigt_multifit_component</code><span class="sig-paren">(</span><em>x: numpy.ndarray</em>, <em>median: float</em>, <em>amplitude: float</em>, <em>lorentzian_hwhm: float</em>, <em>gaussian_hwhm: float</em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="reference internal" href="_modules/PLinterafit/models.html#voigt_multifit_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.models.voigt_multifit_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Voigt line shape at ‘x’ with median ‘median’, normalisation ‘amplitude’, Lorentzian component HWHM ‘lorentzian_hwhm’
+and Gaussian component HWHM ‘gaussian_hwhm’. Uses Voig profile from Python in-build library.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>x <span class="classifier-delimiter">:</span> <span class="classifier">numpy.ndarray</span></dt>
+<dd>The x-coordinates at which to compute the Voigt line shape.</dd>
+<dt>median <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The median (center) of the Voigt line shape.</dd>
+<dt>amplitude <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The normalisation of the Voigt line shape.</dd>
+<dt>lorentzian_hwhm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The half-width at half-maximum (HWHM) of the Lorentzian component of the Voigt line shape.</dd>
+<dt>gaussian_hwhm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>numpy.ndarray</dt>
+<dd>The Voigt line shape at ‘x’.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PLinterafit.plotting">
+<span id="plinterafit-plotting-module"></span><h2>PLinterafit.plotting module<a class="headerlink" href="#module-PLinterafit.plotting" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="PLinterafit.plotting.plot_data_and_five_voigt_seed_function">
+<code class="descclassname">PLinterafit.plotting.</code><code class="descname">plot_data_and_five_voigt_seed_function</code><span class="sig-paren">(</span><em>data: numpy.ndarray</em>, <em>func: callable</em>, <em>seed: tuple</em><span class="sig-paren">)</span> &#x2192; object<a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_data_and_five_voigt_seed_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.plotting.plot_data_and_five_voigt_seed_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the experimental data, the Voigt seed functions, and the total sum of them.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: 2D array of floats</dt>
+<dd>Experimental data, with columns for the x-values and y-values</dd>
+<dt>func: callable</dt>
+<dd>Function to plot, representing the Voigt seed function</dd>
+<dt>seed: tuple</dt>
+<dd>Initial guess for the parameters of the Voigt seed function</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>tuple</dt>
+<dd>A tuple containing the figure and axis objects.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.plotting.plot_data_and_one_voigt_seed_function">
+<code class="descclassname">PLinterafit.plotting.</code><code class="descname">plot_data_and_one_voigt_seed_function</code><span class="sig-paren">(</span><em>data: numpy.array</em>, <em>func: callable</em>, <em>seed: tuple</em><span class="sig-paren">)</span> &#x2192; object<a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_data_and_one_voigt_seed_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.plotting.plot_data_and_one_voigt_seed_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the experimental data and the Voigt seed function.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: 2D array of floats</dt>
+<dd>Experimental data, with columns for the x-values and y-values</dd>
+<dt>func: callable</dt>
+<dd>Function to plot, representing the Voigt seed function</dd>
+<dt>seed: tuple</dt>
+<dd>Initial guess for the parameters of the Voigt seed function</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>tuple</dt>
+<dd>A tuple containing the figure and axis objects.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.plotting.plot_fitted_results_five_voigt">
+<code class="descclassname">PLinterafit.plotting.</code><code class="descname">plot_fitted_results_five_voigt</code><span class="sig-paren">(</span><em>eV: numpy.array</em>, <em>observed: numpy.array</em>, <em>expected: numpy.array</em>, <em>uncertainty: numpy.array</em>, <em>popt: numpy.array</em>, <em>popt_std: numpy.array</em>, <em>residuals: numpy.array</em>, <em>chi2: float</em>, <em>p_value: float</em>, <em>ndof: float</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_fitted_results_five_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.plotting.plot_fitted_results_five_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the experimental data, the fitted Voigt functions, the total sum of Voigt fit, and the residual differences between the observed and fitted results.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>eV <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The photon energies in eV at which the data was collected.</dd>
+<dt>observed <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The observed photon counts for each energy.</dd>
+<dt>expected <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The expected photon counts calculated from the fitted Voigt functions.</dd>
+<dt>uncertainty <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The uncertainties in the observed photon counts.</dd>
+<dt>popt <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The best-fit parameters for the Voigt functions.</dd>
+<dt>popt_std <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The standard deviations of the best-fit parameters.</dd>
+<dt>residuals <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The difference between the observed and expected photon counts.</dd>
+<dt>chi2 <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The chi-squared value of the fit.</dd>
+<dt>p_value <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The p-value for the fit.</dd>
+<dt>ndof <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The number of degrees of freedom of the fit.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>None</dt>
+<dd>The function saves a plot of the fitted results and residuals to a file.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.plotting.plot_fitted_results_one_voigt">
+<code class="descclassname">PLinterafit.plotting.</code><code class="descname">plot_fitted_results_one_voigt</code><span class="sig-paren">(</span><em>eV: numpy.array</em>, <em>observed: numpy.array</em>, <em>expected: numpy.array</em>, <em>uncertainty: numpy.array</em>, <em>popt: numpy.array</em>, <em>popt_std: numpy.array</em>, <em>residuals: numpy.array</em>, <em>chi2: float</em>, <em>p_value: float</em>, <em>ndof: float</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_fitted_results_one_voigt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.plotting.plot_fitted_results_one_voigt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the experimental data, the fitted Voigt function, the total fit, and the residual differences between the observed and fitted results.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>eV <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The photon energies in eV at which the data was collected.</dd>
+<dt>observed <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The observed photon counts for each energy.</dd>
+<dt>expected <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The expected photon counts calculated from the fitted Voigt functions.</dd>
+<dt>uncertainty <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The uncertainties in the observed photon counts.</dd>
+<dt>popt <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The best-fit parameters for the Voigt functions.</dd>
+<dt>popt_std <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The standard deviations of the best-fit parameters.</dd>
+<dt>residuals <span class="classifier-delimiter">:</span> <span class="classifier">numpy array of floats</span></dt>
+<dd>The difference between the observed and expected photon counts.</dd>
+<dt>chi2 <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The chi-squared value of the fit.</dd>
+<dt>p_value <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The p-value for the fit.</dd>
+<dt>ndof <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>The number of degrees of freedom of the fit.</dd>
+</dl>
+</div></blockquote>
+<blockquote>
+<div><dl class="docutils">
+<dt>None</dt>
+<dd>The function saves a plot of the fitted results and residuals to a file.</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PLinterafit.statistics">
+<span id="plinterafit-statistics-module"></span><h2>PLinterafit.statistics module<a class="headerlink" href="#module-PLinterafit.statistics" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="PLinterafit.statistics.compute_chisquare">
+<code class="descclassname">PLinterafit.statistics.</code><code class="descname">compute_chisquare</code><span class="sig-paren">(</span><em>observed: numpy.ndarray</em>, <em>expected: numpy.ndarray</em>, <em>uncertainty: numpy.ndarray</em>, <em>ndof: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/statistics.html#compute_chisquare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.statistics.compute_chisquare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the chi-squared test statistic and p-value given observed and expected values,
+their uncertainties, and the number of degrees of freedom.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>observed: array</dt>
+<dd>Observed values.</dd>
+<dt>expected: array</dt>
+<dd>Expected values.</dd>
+<dt>uncertainty: array</dt>
+<dd>Uncertainties of observed values.</dd>
+<dt>ndof: float</dt>
+<dd>Degrees of freedom.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns: tuple</dt>
+<dd>A tuple containing the chi-squared test statistic and p-value.</dd>
+<dt>Raises:</dt>
+<dd>ValueError: If the shapes of the input arrays are not compatible.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.statistics.do_statistics">
+<code class="descclassname">PLinterafit.statistics.</code><code class="descname">do_statistics</code><span class="sig-paren">(</span><em>func</em>, <em>eV</em>, <em>observed</em>, <em>seed</em>, <em>mode</em>, <em>My_maxfav</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/statistics.html#do_statistics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.statistics.do_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs statistical analysis on a given data set using the specified function and the mode of noise distribution.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>func: str</dt>
+<dd>A callable function representing the fitting model.</dd>
+<dt>eV: np.array</dt>
+<dd>A numpy array containing the x-values of the data set.</dd>
+<dt>observed: np.array</dt>
+<dd>A numpy array containing the y-values of the observed data set.</dd>
+<dt>seed: list</dt>
+<dd>A list of four float values representing the seed values for the Voigt profile.</dd>
+<dt>mode: str</dt>
+<dd>A string specifying the mode of the underlying noise distribution of the data.</dd>
+<dt>My_maxfav: int</dt>
+<dd>An integer representing the maximum number of function evaluations for the fitting routine.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>tuple: A tuple containing the chi-squared test statistic and p-value.</dd>
+<dt>Raises:</dt>
+<dd>ValueError: If the mode of the underlying noise distribution neither “poisson” nor “gauss”.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="PLinterafit.statistics.getNDOF">
+<code class="descclassname">PLinterafit.statistics.</code><code class="descname">getNDOF</code><span class="sig-paren">(</span><em>data: numpy.ndarray</em>, <em>popt: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/statistics.html#getNDOF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PLinterafit.statistics.getNDOF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of degrees of freedom given a data array and a parameter array.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>data: array </dt>
+<dd>Data array.</dd>
+<dt>popt: array </dt>
+<dd>Array of fitted parameter values.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Returns: float</dt>
+<dd>Degrees of freedom.</dd>
+<dt>Raises:</dt>
+<dd>ValueError: If the shapes of the input arrays are not compatible.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PLinterafit">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PLinterafit" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="main.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

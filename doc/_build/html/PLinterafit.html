@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLinterafit package &mdash; PLinterafit 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="main module" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">PLinterafit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PLinterafit package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.analysis">PLinterafit.analysis module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.analysis.run_five_voigt_fitting"><code class="docutils literal notranslate"><span class="pre">run_five_voigt_fitting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.analysis.run_one_voigt_fitting"><code class="docutils literal notranslate"><span class="pre">run_one_voigt_fitting()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.dataPreparation">PLinterafit.dataPreparation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.add_photon_energy"><code class="docutils literal notranslate"><span class="pre">add_photon_energy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.get_fit_data"><code class="docutils literal notranslate"><span class="pre">get_fit_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.load_CSV_data"><code class="docutils literal notranslate"><span class="pre">load_CSV_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.load_data"><code class="docutils literal notranslate"><span class="pre">load_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.normalise_data"><code class="docutils literal notranslate"><span class="pre">normalise_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.order_of_magnitude"><code class="docutils literal notranslate"><span class="pre">order_of_magnitude()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.prepare_data_for_stat_test"><code class="docutils literal notranslate"><span class="pre">prepare_data_for_stat_test()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.subtract_background"><code class="docutils literal notranslate"><span class="pre">subtract_background()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.dataPreparation.truncate"><code class="docutils literal notranslate"><span class="pre">truncate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.fitting">PLinterafit.fitting module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.fitting.create_button"><code class="docutils literal notranslate"><span class="pre">create_button()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.fitting.create_slider"><code class="docutils literal notranslate"><span class="pre">create_slider()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.fitting.create_slider_group_voigt"><code class="docutils literal notranslate"><span class="pre">create_slider_group_voigt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.fitting.fit_five_voigts"><code class="docutils literal notranslate"><span class="pre">fit_five_voigts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.fitting.fit_one_voigt"><code class="docutils literal notranslate"><span class="pre">fit_one_voigt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.models">PLinterafit.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.models.five_voigt"><code class="docutils literal notranslate"><span class="pre">five_voigt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.models.one_voigt"><code class="docutils literal notranslate"><span class="pre">one_voigt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.models.voigt_multifit_component"><code class="docutils literal notranslate"><span class="pre">voigt_multifit_component()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.plotting">PLinterafit.plotting module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.plotting.plot_data_and_five_voigt_seed_function"><code class="docutils literal notranslate"><span class="pre">plot_data_and_five_voigt_seed_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.plotting.plot_data_and_one_voigt_seed_function"><code class="docutils literal notranslate"><span class="pre">plot_data_and_one_voigt_seed_function()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.plotting.plot_fitted_results_five_voigt"><code class="docutils literal notranslate"><span class="pre">plot_fitted_results_five_voigt()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.plotting.plot_fitted_results_one_voigt"><code class="docutils literal notranslate"><span class="pre">plot_fitted_results_one_voigt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit.statistics">PLinterafit.statistics module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.statistics.compute_chisquare"><code class="docutils literal notranslate"><span class="pre">compute_chisquare()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.statistics.do_statistics"><code class="docutils literal notranslate"><span class="pre">do_statistics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#PLinterafit.statistics.getNDOF"><code class="docutils literal notranslate"><span class="pre">getNDOF()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PLinterafit">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">PLinterafit</a></li>
+      <li class="breadcrumb-item active">PLinterafit package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/PLinterafit.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plinterafit-package">
+<h1>PLinterafit package<a class="headerlink" href="#plinterafit-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-PLinterafit.analysis">
+<span id="plinterafit-analysis-module"></span><h2>PLinterafit.analysis module<a class="headerlink" href="#module-PLinterafit.analysis" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.analysis.run_five_voigt_fitting">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.analysis.</span></span><span class="sig-name descname"><span class="pre">run_five_voigt_fitting</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/analysis.html#run_five_voigt_fitting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.analysis.run_five_voigt_fitting" title="Permalink to this definition"></a></dt>
+<dd><p>Performs five Voigt functions fitting on photoluminescence spectral data.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: 0 on successful completion of function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.analysis.run_one_voigt_fitting">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.analysis.</span></span><span class="sig-name descname"><span class="pre">run_one_voigt_fitting</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/analysis.html#run_one_voigt_fitting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.analysis.run_one_voigt_fitting" title="Permalink to this definition"></a></dt>
+<dd><p>Performs a Voigt fitting on photoluminescence spectral data.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>int: 0 on successful completion of function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-PLinterafit.dataPreparation">
+<span id="plinterafit-datapreparation-module"></span><h2>PLinterafit.dataPreparation module<a class="headerlink" href="#module-PLinterafit.dataPreparation" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.add_photon_energy">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">add_photon_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#add_photon_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.add_photon_energy" title="Permalink to this definition"></a></dt>
+<dd><p>Add photon energy computed from vacuum wavelength.</p>
+<section id="args">
+<h3>Args:<a class="headerlink" href="#args" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array to be processed.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array with an additional dimension as photon energy.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.get_fit_data">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">get_fit_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_cutoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#get_fit_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.get_fit_data" title="Permalink to this definition"></a></dt>
+<dd><p>Return data within the interest range bound by lower_cutoff and upper_cutoff.</p>
+<section id="id1">
+<h3>Args:<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array of interest.</p>
+</dd>
+<dt>lower_cutoff: float</dt><dd><p>Lower cutoff range</p>
+</dd>
+<dt>upper_cutoff: float</dt><dd><p>Upper cutoff range</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id2">
+<h3>Returns:<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array within the selected cutoff range.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.load_CSV_data">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">load_CSV_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datafile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#load_CSV_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.load_CSV_data" title="Permalink to this definition"></a></dt>
+<dd><p>Load CSV data and return numpy array.</p>
+<section id="id3">
+<h3>Args:<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>datafile: str</dt><dd><p>File location is given as string.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id4">
+<h3>Returns:<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array loaded from the file location.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.load_data">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">load_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalisation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#load_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.load_data" title="Permalink to this definition"></a></dt>
+<dd><p>Load data files.</p>
+<section id="id5">
+<h3>Args:<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>filepath: str</dt><dd><p>Filepath given as a string.</p>
+</dd>
+<dt>background: float</dt><dd><p>Background level to be removed from the data.</p>
+</dd>
+<dt>normalisation: float</dt><dd><p>Value by which the data is normalized with.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id6">
+<h3>Returns:<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Processed data array: renormalized, background removed, new dimension is added as photon energy.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.normalise_data">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">normalise_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#normalise_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.normalise_data" title="Permalink to this definition"></a></dt>
+<dd><p>Normalise data.</p>
+<section id="id7">
+<h3>Args:<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array to be normalized.</p>
+</dd>
+<dt>factor: float</dt><dd><p>Normalization factor.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id8">
+<h3>Returns:<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Normalized data array.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.order_of_magnitude">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">order_of_magnitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#order_of_magnitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.order_of_magnitude" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the order of magnitude of a given number.</p>
+<section id="id9">
+<h3>Args:<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>number: float</dt><dd><p>The float value.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id10">
+<h3>Returns:<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>integer: </dt><dd><p>The order of magnituge.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.prepare_data_for_stat_test">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">prepare_data_for_stat_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pcov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eV</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#prepare_data_for_stat_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.prepare_data_for_stat_test" title="Permalink to this definition"></a></dt>
+<dd><p>Prepare data for statistical test by normalizing expected counts, calculating uncertainties,
+and correcting parameters.</p>
+<section id="id11">
+<h3>Args:<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>observed: array </dt><dd><p>Observed counts.</p>
+</dd>
+<dt>expected: array</dt><dd><p>Expected counts.</p>
+</dd>
+<dt>popt: array</dt><dd><p>Best-fit parameters.</p>
+</dd>
+<dt>pcov: array</dt><dd><p>Covariance matrix of popt.</p>
+</dd>
+<dt>mode: str</dt><dd><p>“poisson” or “gauss” mode.</p>
+</dd>
+<dt>func: function</dt><dd><p>Model function to use.</p>
+</dd>
+<dt>eV: array</dt><dd><p>Energy values.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id12">
+<h3>Returns:<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>expected: array</dt><dd><p>Normalized expected counts.</p>
+</dd>
+<dt>uncertainty: array</dt><dd><p>Uncertainties.</p>
+</dd>
+<dt>popt: array</dt><dd><p>Corrected best-fit parameters.</p>
+</dd>
+<dt>popt_std: array</dt><dd><p>Corrected standard deviations of popt.</p>
+</dd>
+<dt>residuals: array</dt><dd><p>Residuals.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="raises">
+<h3>Raises:<a class="headerlink" href="#raises" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>ValueError: </dt><dd><p>If the mode is invalid.
+If the function_name is invalid.
+If the tolerance level has not reached the value atol.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.subtract_background">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">subtract_background</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#subtract_background"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.subtract_background" title="Permalink to this definition"></a></dt>
+<dd><p>Subtract background from data.</p>
+<section id="id13">
+<h3>Args:<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Data array to be processed.</p>
+</dd>
+<dt>background: float</dt><dd><p>Background to be removed.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id14">
+<h3>Returns:<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array</dt><dd><p>Background subtracted data array.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.dataPreparation.truncate">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.dataPreparation.</span></span><span class="sig-name descname"><span class="pre">truncate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/PLinterafit/dataPreparation.html#truncate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.dataPreparation.truncate" title="Permalink to this definition"></a></dt>
+<dd><p>Truncates a float value to a specific number of decimal places.</p>
+<section id="id15">
+<h3>Args:<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>number: float</dt><dd><p>The float value to truncate.</p>
+</dd>
+<dt>decimals: int, optional</dt><dd><p>The number of decimal places to keep. Defaults to 0.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id16">
+<h3>Returns:<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>float: </dt><dd><p>The truncated float value.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id17">
+<h3>Raises:<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>TypeError: </dt><dd><p>If the decimals argument is not an integer.</p>
+</dd>
+<dt>ValueError: </dt><dd><p>If the decimals argument is negative.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-PLinterafit.fitting">
+<span id="plinterafit-fitting-module"></span><h2>PLinterafit.fitting module<a class="headerlink" href="#module-PLinterafit.fitting" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.fitting.create_button">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.fitting.</span></span><span class="sig-name descname"><span class="pre">create_button</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Button</span></span></span><a class="reference internal" href="_modules/PLinterafit/fitting.html#create_button"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.fitting.create_button" title="Permalink to this definition"></a></dt>
+<dd><p>Create a button widget with the given label.</p>
+<section id="id18">
+<h3>Args:<a class="headerlink" href="#id18" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>ax: axes</dt><dd><p>The axes object on which to create the button.</p>
+</dd>
+<dt>label: str</dt><dd><p>The label for the button.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id19">
+<h3>Returns:<a class="headerlink" href="#id19" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>button: Button</dt><dd><p>The created button widget.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.fitting.create_slider">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.fitting.</span></span><span class="sig-name descname"><span class="pre">create_slider</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valinit</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Slider</span></span></span><a class="reference internal" href="_modules/PLinterafit/fitting.html#create_slider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.fitting.create_slider" title="Permalink to this definition"></a></dt>
+<dd><p>Create a slider widget with the given minimum, maximum, and initial values.</p>
+<section id="id20">
+<h3>Args:<a class="headerlink" href="#id20" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>ax: axes</dt><dd><p>The axes object on which to create the slider.</p>
+</dd>
+<dt>label: str</dt><dd><p>The label for the slider.</p>
+</dd>
+<dt>valmin: float</dt><dd><p>The minimum value of the slider.</p>
+</dd>
+<dt>valmax: float</dt><dd><p>The maximum value of the slider.</p>
+</dd>
+<dt>valinit: float</dt><dd><p>The initial value of the slider.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id21">
+<h3>Returns:<a class="headerlink" href="#id21" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>slider: Slider</dt><dd><p>The created slider widget.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.fitting.create_slider_group_voigt">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.fitting.</span></span><span class="sig-name descname"><span class="pre">create_slider_group_voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed_temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voigt_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_yaxis0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slider_thickness</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/fitting.html#create_slider_group_voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.fitting.create_slider_group_voigt" title="Permalink to this definition"></a></dt>
+<dd><p>Create a group of four sliders for a Voigt profile with the given seed values as seed_temp.</p>
+<section id="id22">
+<h3>Args:<a class="headerlink" href="#id22" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>fig: figure </dt><dd><p>The figure object on which to create the slider group.</p>
+</dd>
+<dt>seed_temp: list</dt><dd><p>A list of four float values representing the seed values for the Voigt profile.</p>
+</dd>
+<dt>update: function</dt><dd><p>The function to call when any slider in the group is changed.</p>
+</dd>
+<dt>voigt_order: int</dt><dd><p>The order of the Voigt profile.</p>
+</dd>
+<dt>position_yaxis0: float</dt><dd><p>The y-axis position of the top slider in the group.</p>
+</dd>
+<dt>slider_thickness: float </dt><dd><p>Thickness of the sliders.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id23">
+<h3>Returns:<a class="headerlink" href="#id23" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>tuple</dt><dd><p>A tuple of four Slider objects representing the median, amplitude, Lorenzian half-width at half-maximum (HWHM),
+and Gaussian HWHM of the Voigt profile, respectively.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.fitting.fit_five_voigts">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.fitting.</span></span><span class="sig-name descname"><span class="pre">fit_five_voigts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'poisson'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/fitting.html#fit_five_voigts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.fitting.fit_five_voigts" title="Permalink to this definition"></a></dt>
+<dd><p>Fit five Voigt functions to data using interactive sliders to adjust parameters.</p>
+<section id="id24">
+<h3>Args:<a class="headerlink" href="#id24" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data<span class="classifier">np.array</span></dt><dd><p>The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains
+the Photon energy values and the second column contains the Ph0ton counts values.</p>
+</dd>
+<dt>median1-5<span class="classifier">float</span></dt><dd><p>The initial guess for the median of each Voigt function 1-5.</p>
+</dd>
+<dt>amplitude1-5: float</dt><dd><p>The initial guess for the amplitude of each Voigt function 1-5.</p>
+</dd>
+<dt>lorentzian_hwhm1-5<span class="classifier">float</span></dt><dd><p>The initial guess for the half width of the Lorentzian component
+of the Voigt function 1-5.</p>
+</dd>
+<dt>gaussian_hwhm1-5<span class="classifier">float</span></dt><dd><p>The initial guess for the half width of the Gaussian component
+of each Voigt function 1-5.</p>
+</dd>
+<dt>offset<span class="classifier">float, optional</span></dt><dd><p>The initial guess for the offset of each Voigt function. Defaults to 0.</p>
+</dd>
+<dt>mode<span class="classifier">str</span></dt><dd><p>The mode of the underlying noise distribution in the data, either “poisson” or “gauss”. Defaults to “poisson”.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id25">
+<h3>Returns:<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing the fit parameters (median, amplitude, lorentzian_width,
+gaussian_width, offset), the standard errors of the fit parameters, the residuals,
+and the chi-squared value.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.fitting.fit_one_voigt">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.fitting.</span></span><span class="sig-name descname"><span class="pre">fit_one_voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'poisson'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/PLinterafit/fitting.html#fit_one_voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.fitting.fit_one_voigt" title="Permalink to this definition"></a></dt>
+<dd><p>Fit a Voigt function to data using interactive sliders to adjust parameters.</p>
+<section id="id26">
+<h3>Args:<a class="headerlink" href="#id26" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data<span class="classifier">np.array</span></dt><dd><p>The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains
+the photon energy values and the second column contains the photon counts values.</p>
+</dd>
+<dt>median<span class="classifier">float</span></dt><dd><p>The initial guess for the median of the Voigt function.</p>
+</dd>
+<dt>amplitude<span class="classifier">float</span></dt><dd><p>The initial guess for the amplitude of the Voigt function.</p>
+</dd>
+<dt>lorentzian_hwhm<span class="classifier">float</span></dt><dd><p>The initial guess for the half width of the Lorentzian component
+of the Voigt function.</p>
+</dd>
+<dt>gaussian_hwhm<span class="classifier">float</span></dt><dd><p>The initial guess for the half width of the Gaussian component
+of the Voigt function.</p>
+</dd>
+<dt>offset<span class="classifier">float, optional</span></dt><dd><p>The initial guess for the offset of the Voigt function. Defaults to 0.</p>
+</dd>
+<dt>mode<span class="classifier">str</span></dt><dd><p>The mode of the underlying noise distribution in the data, either “poisson” or “gauss”. Defaults to “poisson”.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id27">
+<h3>Returns:<a class="headerlink" href="#id27" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing the fit parameters (median, amplitude, lorentzian_width,
+gaussian_width, offset), the standard errors of the fit parameters, the residuals,
+and the chi-squared value.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-PLinterafit.models">
+<span id="plinterafit-models-module"></span><h2>PLinterafit.models module<a class="headerlink" href="#module-PLinterafit.models" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.models.five_voigt">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.models.</span></span><span class="sig-name descname"><span class="pre">five_voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm4</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm5</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/models.html#five_voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.models.five_voigt" title="Permalink to this definition"></a></dt>
+<dd><p>Return the line shape of five Voigt distributions at ‘x’.</p>
+<section id="id28">
+<h3>Args:<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>x<span class="classifier">numpy.ndarray</span></dt><dd><p>The x-coordinates at which to compute the Voigt line shape.</p>
+</dd>
+<dt>median1-5: float</dt><dd><p>The median (center) of respective Voigt line shape.</p>
+</dd>
+<dt>amplitude1-5: float</dt><dd><p>The normalisation of respective Voigt line shape.</p>
+</dd>
+<dt>lorentzian_hwhm1-5: float</dt><dd><p>The half-width at half-maximum (HWHM) of the Lorentzian component of respective Voigt line shape.</p>
+</dd>
+<dt>gaussian_hwhm1-5: float</dt><dd><p>The half-width at half-maximum (HWHM) of the Gaussian component of respective Voigt line shape.</p>
+</dd>
+<dt>offset: float</dt><dd><p>The offset value of the sum of five Voigt function. Defaults to 0.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id29">
+<h3>Returns:<a class="headerlink" href="#id29" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>The line shape of five Voigt distributions at ‘x’.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.models.one_voigt">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.models.</span></span><span class="sig-name descname"><span class="pre">one_voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/models.html#one_voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.models.one_voigt" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the line shape of a single Voigt distribution at ‘x’.</p>
+<section id="id30">
+<h3>Args:<a class="headerlink" href="#id30" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>x<span class="classifier">numpy.ndarray</span></dt><dd><p>The x-coordinates at which to compute the Voigt line shape.</p>
+</dd>
+<dt>median<span class="classifier">float</span></dt><dd><p>The median (center) of the Voigt line shape.</p>
+</dd>
+<dt>amplitude<span class="classifier">float</span></dt><dd><p>The normalisation of the Voigt line shape.</p>
+</dd>
+<dt>lorentzian_hwhm<span class="classifier">float</span></dt><dd><p>The half-width at half-maximum (HWHM) of the Lorentzian component of the Voigt line shape.</p>
+</dd>
+<dt>gaussian_hwhm<span class="classifier">float</span></dt><dd><p>The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.</p>
+</dd>
+<dt>offset: float</dt><dd><p>The offset value of the Voigt function. Defaults to 0.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id31">
+<h3>Returns:<a class="headerlink" href="#id31" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>The Voigt line shape at ‘x’.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.models.voigt_multifit_component">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.models.</span></span><span class="sig-name descname"><span class="pre">voigt_multifit_component</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amplitude</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lorentzian_hwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gaussian_hwhm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/PLinterafit/models.html#voigt_multifit_component"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.models.voigt_multifit_component" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the Voigt line shape at ‘x’ with median ‘median’, normalisation ‘amplitude’, Lorentzian component HWHM ‘lorentzian_hwhm’
+and Gaussian component HWHM ‘gaussian_hwhm’. Uses Voig profile from Python in-build library.</p>
+<section id="id32">
+<h3>Args:<a class="headerlink" href="#id32" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>x<span class="classifier">numpy.ndarray</span></dt><dd><p>The x-coordinates at which to compute the Voigt line shape.</p>
+</dd>
+<dt>median<span class="classifier">float</span></dt><dd><p>The median (center) of the Voigt line shape.</p>
+</dd>
+<dt>amplitude<span class="classifier">float</span></dt><dd><p>The normalisation of the Voigt line shape.</p>
+</dd>
+<dt>lorentzian_hwhm<span class="classifier">float</span></dt><dd><p>The half-width at half-maximum (HWHM) of the Lorentzian component of the Voigt line shape.</p>
+</dd>
+<dt>gaussian_hwhm<span class="classifier">float</span></dt><dd><p>The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id33">
+<h3>Returns:<a class="headerlink" href="#id33" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>The Voigt line shape at ‘x’.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-PLinterafit.plotting">
+<span id="plinterafit-plotting-module"></span><h2>PLinterafit.plotting module<a class="headerlink" href="#module-PLinterafit.plotting" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.plotting.plot_data_and_five_voigt_seed_function">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_data_and_five_voigt_seed_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_data_and_five_voigt_seed_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.plotting.plot_data_and_five_voigt_seed_function" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the experimental data, the Voigt seed functions, and the total sum of them.</p>
+<section id="id34">
+<h3>Args:<a class="headerlink" href="#id34" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: 2D array of floats</dt><dd><p>Experimental data, with columns for the x-values and y-values</p>
+</dd>
+<dt>func: callable</dt><dd><p>Function to plot, representing the Voigt seed function</p>
+</dd>
+<dt>seed: tuple</dt><dd><p>Initial guess for the parameters of the Voigt seed function</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id35">
+<h3>Returns:<a class="headerlink" href="#id35" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing the figure and axis objects.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.plotting.plot_data_and_one_voigt_seed_function">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_data_and_one_voigt_seed_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">object</span></span></span><a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_data_and_one_voigt_seed_function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.plotting.plot_data_and_one_voigt_seed_function" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the experimental data and the Voigt seed function.</p>
+<section id="id36">
+<h3>Args:<a class="headerlink" href="#id36" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: 2D array of floats</dt><dd><p>Experimental data, with columns for the x-values and y-values</p>
+</dd>
+<dt>func: callable</dt><dd><p>Function to plot, representing the Voigt seed function</p>
+</dd>
+<dt>seed: tuple</dt><dd><p>Initial guess for the parameters of the Voigt seed function</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id37">
+<h3>Returns:<a class="headerlink" href="#id37" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>tuple</dt><dd><p>A tuple containing the figure and axis objects.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.plotting.plot_fitted_results_five_voigt">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_fitted_results_five_voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eV</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popt_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residuals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_fitted_results_five_voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.plotting.plot_fitted_results_five_voigt" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the experimental data, the fitted Voigt functions, the total sum of Voigt fit, and the residual differences between the observed and fitted results.</p>
+<section id="id38">
+<h3>Args:<a class="headerlink" href="#id38" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>eV<span class="classifier">numpy array of floats</span></dt><dd><p>The photon energies in eV at which the data was collected.</p>
+</dd>
+<dt>observed<span class="classifier">numpy array of floats</span></dt><dd><p>The observed photon counts for each energy.</p>
+</dd>
+<dt>expected<span class="classifier">numpy array of floats</span></dt><dd><p>The expected photon counts calculated from the fitted Voigt functions.</p>
+</dd>
+<dt>uncertainty<span class="classifier">numpy array of floats</span></dt><dd><p>The uncertainties in the observed photon counts.</p>
+</dd>
+<dt>popt<span class="classifier">numpy array of floats</span></dt><dd><p>The best-fit parameters for the Voigt functions.</p>
+</dd>
+<dt>popt_std<span class="classifier">numpy array of floats</span></dt><dd><p>The standard deviations of the best-fit parameters.</p>
+</dd>
+<dt>residuals<span class="classifier">numpy array of floats</span></dt><dd><p>The difference between the observed and expected photon counts.</p>
+</dd>
+<dt>chi2<span class="classifier">float</span></dt><dd><p>The chi-squared value of the fit.</p>
+</dd>
+<dt>p_value<span class="classifier">float</span></dt><dd><p>The p-value for the fit.</p>
+</dd>
+<dt>ndof<span class="classifier">float</span></dt><dd><p>The number of degrees of freedom of the fit.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id39">
+<h3>Returns:<a class="headerlink" href="#id39" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>None</dt><dd><p>The function saves a plot of the fitted results and residuals to a file.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.plotting.plot_fitted_results_one_voigt">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.plotting.</span></span><span class="sig-name descname"><span class="pre">plot_fitted_results_one_voigt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eV</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popt_std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residuals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/PLinterafit/plotting.html#plot_fitted_results_one_voigt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.plotting.plot_fitted_results_one_voigt" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the experimental data, the fitted Voigt function, the total fit, and the residual differences between the observed and fitted results.</p>
+<section id="id40">
+<h3>Args:<a class="headerlink" href="#id40" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>eV<span class="classifier">numpy array of floats</span></dt><dd><p>The photon energies in eV at which the data was collected.</p>
+</dd>
+<dt>observed<span class="classifier">numpy array of floats</span></dt><dd><p>The observed photon counts for each energy.</p>
+</dd>
+<dt>expected<span class="classifier">numpy array of floats</span></dt><dd><p>The expected photon counts calculated from the fitted Voigt functions.</p>
+</dd>
+<dt>uncertainty<span class="classifier">numpy array of floats</span></dt><dd><p>The uncertainties in the observed photon counts.</p>
+</dd>
+<dt>popt<span class="classifier">numpy array of floats</span></dt><dd><p>The best-fit parameters for the Voigt functions.</p>
+</dd>
+<dt>popt_std<span class="classifier">numpy array of floats</span></dt><dd><p>The standard deviations of the best-fit parameters.</p>
+</dd>
+<dt>residuals<span class="classifier">numpy array of floats</span></dt><dd><p>The difference between the observed and expected photon counts.</p>
+</dd>
+<dt>chi2<span class="classifier">float</span></dt><dd><p>The chi-squared value of the fit.</p>
+</dd>
+<dt>p_value<span class="classifier">float</span></dt><dd><p>The p-value for the fit.</p>
+</dd>
+<dt>ndof<span class="classifier">float</span></dt><dd><p>The number of degrees of freedom of the fit.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id41">
+<h3>Returns:<a class="headerlink" href="#id41" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>None</dt><dd><p>The function saves a plot of the fitted results and residuals to a file.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-PLinterafit.statistics">
+<span id="plinterafit-statistics-module"></span><h2>PLinterafit.statistics module<a class="headerlink" href="#module-PLinterafit.statistics" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.statistics.compute_chisquare">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.statistics.</span></span><span class="sig-name descname"><span class="pre">compute_chisquare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncertainty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/statistics.html#compute_chisquare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.statistics.compute_chisquare" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the chi-squared test statistic and p-value given observed and expected values,
+their uncertainties, and the number of degrees of freedom.</p>
+<section id="id42">
+<h3>Args:<a class="headerlink" href="#id42" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>observed: array</dt><dd><p>Observed values.</p>
+</dd>
+<dt>expected: array</dt><dd><p>Expected values.</p>
+</dd>
+<dt>uncertainty: array</dt><dd><p>Uncertainties of observed values.</p>
+</dd>
+<dt>ndof: float</dt><dd><p>Degrees of freedom.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns: tuple</dt><dd><p>A tuple containing the chi-squared test statistic and p-value.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the shapes of the input arrays are not compatible.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.statistics.do_statistics">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.statistics.</span></span><span class="sig-name descname"><span class="pre">do_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eV</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">My_maxfav</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/statistics.html#do_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.statistics.do_statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Performs statistical analysis on a given data set using the specified function and the mode of noise distribution.</p>
+<section id="id43">
+<h3>Args:<a class="headerlink" href="#id43" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>func: str</dt><dd><p>A callable function representing the fitting model.</p>
+</dd>
+<dt>eV: np.array</dt><dd><p>A numpy array containing the x-values of the data set.</p>
+</dd>
+<dt>observed: np.array</dt><dd><p>A numpy array containing the y-values of the observed data set.</p>
+</dd>
+<dt>seed: list</dt><dd><p>A list of four float values representing the seed values for the Voigt profile.</p>
+</dd>
+<dt>mode: str</dt><dd><p>A string specifying the mode of the underlying noise distribution of the data.</p>
+</dd>
+<dt>My_maxfav: int</dt><dd><p>An integer representing the maximum number of function evaluations for the fitting routine.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>tuple: A tuple containing the chi-squared test statistic and p-value.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the mode of the underlying noise distribution neither “poisson” nor “gauss”.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="PLinterafit.statistics.getNDOF">
+<span class="sig-prename descclassname"><span class="pre">PLinterafit.statistics.</span></span><span class="sig-name descname"><span class="pre">getNDOF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PLinterafit/statistics.html#getNDOF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PLinterafit.statistics.getNDOF" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of degrees of freedom given a data array and a parameter array.</p>
+<section id="id44">
+<h3>Args:<a class="headerlink" href="#id44" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>data: array </dt><dd><p>Data array.</p>
+</dd>
+<dt>popt: array </dt><dd><p>Array of fitted parameter values.</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns: float</dt><dd><p>Degrees of freedom.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the shapes of the input arrays are not compatible.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-PLinterafit">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PLinterafit" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="main.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLinterafit.models &mdash; PLinterafit 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PLinterafit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">PLinterafit</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PLinterafit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PLinterafit.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for PLinterafit.models</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Authors: Viktor Bender and Bayarjargal N.Tugchin</span>
+<span class="c1"># Date: 16/03/2023</span>
+<span class="c1"># Last update: 01/04/2023</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">voigt_profile</span>
+
+
+<div class="viewcode-block" id="voigt_multifit_component"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.models.voigt_multifit_component">[docs]</a><span class="k">def</span> <span class="nf">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+                             <span class="n">gaussian_hwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the Voigt line shape at &#39;x&#39; with median &#39;median&#39;, normalisation &#39;amplitude&#39;, Lorentzian component HWHM &#39;lorentzian_hwhm&#39;</span>
+<span class="sd">    and Gaussian component HWHM &#39;gaussian_hwhm&#39;. Uses Voig profile from Python in-build library.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    ----------</span>
+<span class="sd">        x : numpy.ndarray</span>
+<span class="sd">            The x-coordinates at which to compute the Voigt line shape.</span>
+<span class="sd">        median : float</span>
+<span class="sd">            The median (center) of the Voigt line shape.</span>
+<span class="sd">        amplitude : float</span>
+<span class="sd">            The normalisation of the Voigt line shape.</span>
+<span class="sd">        lorentzian_hwhm : float</span>
+<span class="sd">            The half-width at half-maximum (HWHM) of the Lorentzian component of the Voigt line shape.</span>
+<span class="sd">        gaussian_hwhm : float</span>
+<span class="sd">            The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    ---------</span>
+<span class="sd">        numpy.ndarray</span>
+<span class="sd">            The Voigt line shape at &#39;x&#39;.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">amplitude</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">voigt_profile</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">median</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">lorentzian_hwhm</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">gaussian_hwhm</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="one_voigt"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.models.one_voigt">[docs]</a><span class="k">def</span> <span class="nf">one_voigt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">median</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+              <span class="n">gaussian_hwhm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the line shape of a single Voigt distribution at &#39;x&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    ----------</span>
+<span class="sd">        x : numpy.ndarray</span>
+<span class="sd">            The x-coordinates at which to compute the Voigt line shape.</span>
+<span class="sd">        median : float</span>
+<span class="sd">            The median (center) of the Voigt line shape.</span>
+<span class="sd">        amplitude : float</span>
+<span class="sd">            The normalisation of the Voigt line shape.</span>
+<span class="sd">        lorentzian_hwhm : float</span>
+<span class="sd">            The half-width at half-maximum (HWHM) of the Lorentzian component of the Voigt line shape.</span>
+<span class="sd">        gaussian_hwhm : float</span>
+<span class="sd">            The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.</span>
+<span class="sd">        offset: float</span>
+<span class="sd">            The offset value of the Voigt function. Defaults to 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    ---------</span>
+<span class="sd">        numpy.ndarray</span>
+<span class="sd">            The Voigt line shape at &#39;x&#39;.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">amplitude</span><span class="p">,</span> <span class="n">lorentzian_hwhm</span><span class="p">,</span> <span class="n">gaussian_hwhm</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="five_voigt"><a class="viewcode-back" href="../../PLinterafit.html#PLinterafit.models.five_voigt">[docs]</a><span class="k">def</span> <span class="nf">five_voigt</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">median1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+               <span class="n">median2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+               <span class="n">median3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+               <span class="n">median4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm4</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+               <span class="n">median5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">amplitude5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lorentzian_hwhm5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">gaussian_hwhm5</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the line shape of five Voigt distributions at &#39;x&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">       </span>
+<span class="sd">    Args:</span>
+<span class="sd">    ----------</span>
+<span class="sd">        x : numpy.ndarray</span>
+<span class="sd">            The x-coordinates at which to compute the Voigt line shape.</span>
+<span class="sd">        median1-5: float</span>
+<span class="sd">            The median (center) of respective Voigt line shape.</span>
+<span class="sd">        amplitude1-5: float</span>
+<span class="sd">            The normalisation of respective Voigt line shape.</span>
+<span class="sd">        lorentzian_hwhm1-5: float</span>
+<span class="sd">            The half-width at half-maximum (HWHM) of the Lorentzian component of respective Voigt line shape.</span>
+<span class="sd">        gaussian_hwhm1-5: float</span>
+<span class="sd">            The half-width at half-maximum (HWHM) of the Gaussian component of respective Voigt line shape.</span>
+<span class="sd">        offset: float</span>
+<span class="sd">            The offset value of the sum of five Voigt function. Defaults to 0.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    ---------</span>
+<span class="sd">        numpy.ndarray</span>
+<span class="sd">            The line shape of five Voigt distributions at &#39;x&#39;.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">median1</span><span class="p">,</span> <span class="n">amplitude1</span><span class="p">,</span> <span class="n">lorentzian_hwhm1</span><span class="p">,</span> <span class="n">gaussian_hwhm1</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">median2</span><span class="p">,</span> <span class="n">amplitude2</span><span class="p">,</span> <span class="n">lorentzian_hwhm2</span><span class="p">,</span> <span class="n">gaussian_hwhm2</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">median3</span><span class="p">,</span> <span class="n">amplitude3</span><span class="p">,</span> <span class="n">lorentzian_hwhm3</span><span class="p">,</span> <span class="n">gaussian_hwhm3</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">median4</span><span class="p">,</span> <span class="n">amplitude4</span><span class="p">,</span> <span class="n">lorentzian_hwhm4</span><span class="p">,</span> <span class="n">gaussian_hwhm4</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">voigt_multifit_component</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">median5</span><span class="p">,</span> <span class="n">amplitude5</span><span class="p">,</span> <span class="n">lorentzian_hwhm5</span><span class="p">,</span> <span class="n">gaussian_hwhm5</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Viktor Bender, Bayarjargal N.Tugchin.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
