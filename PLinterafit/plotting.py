@@ -14,7 +14,6 @@ def plot_data_and_one_voigt_seed_function(data: np.array, func: callable, seed: 
     Plot the experimental data and the Voigt seed function.
 
     Args:
-    -------
         data: 2D array of floats
             Experimental data, with columns for the x-values and y-values
         func: callable
@@ -23,7 +22,6 @@ def plot_data_and_one_voigt_seed_function(data: np.array, func: callable, seed: 
             Initial guess for the parameters of the Voigt seed function
         
     Returns: 
-    --------
         tuple
             A tuple containing the figure and axis objects.
     """
@@ -50,7 +48,6 @@ def plot_fitted_results_one_voigt(eV: np.array, observed: np.array, expected: np
     Plot the experimental data, the fitted Voigt function, the total fit, and the residual differences between the observed and fitted results.
 
     Args:
-    -------
         eV : numpy array of floats
             The photon energies in eV at which the data was collected.
         observed : numpy array of floats
@@ -73,7 +70,6 @@ def plot_fitted_results_one_voigt(eV: np.array, observed: np.array, expected: np
             The number of degrees of freedom of the fit.
 
     Returns:
-    ---------
         None
             The function saves a plot of the fitted results and residuals to a file.
     
@@ -122,7 +118,6 @@ def plot_data_and_five_voigt_seed_function(data: np.ndarray, func: callable, see
     Plot the experimental data, the Voigt seed functions, and the total sum of them.
 
     Args:
-    -------
         data: 2D array of floats
             Experimental data, with columns for the x-values and y-values
         func: callable
@@ -131,7 +126,6 @@ def plot_data_and_five_voigt_seed_function(data: np.ndarray, func: callable, see
             Initial guess for the parameters of the Voigt seed function
             
     Returns: 
-    ---------
         tuple
             A tuple containing the figure and axis objects.
     
@@ -163,7 +157,6 @@ def plot_fitted_results_five_voigt(eV: np.array, observed: np.array, expected: n
     Plot the experimental data, the fitted Voigt functions, the total sum of Voigt fit, and the residual differences between the observed and fitted results.
 
     Args:
-    -------
         eV : numpy array of floats
             The photon energies in eV at which the data was collected.
         observed : numpy array of floats
@@ -186,7 +179,6 @@ def plot_fitted_results_five_voigt(eV: np.array, observed: np.array, expected: n
             The number of degrees of freedom of the fit.
 
     Returns:
-    ---------
         None
             The function saves a plot of the fitted results and residuals to a file.
     

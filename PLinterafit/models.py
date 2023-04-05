@@ -14,7 +14,6 @@ def voigt_multifit_component(x: np.ndarray, median: float, amplitude: float, lor
     
     
     Args:
-    ----------
         x : numpy.ndarray
             The x-coordinates at which to compute the Voigt line shape.
         median : float
@@ -27,7 +26,6 @@ def voigt_multifit_component(x: np.ndarray, median: float, amplitude: float, lor
             The half-width at half-maximum (HWHM) of the Gaussian component of the Voigt line shape.
 
     Returns:
-    ---------
         numpy.ndarray
             The Voigt line shape at 'x'.
 
@@ -41,7 +39,6 @@ def one_voigt(x: np.ndarray, median: float, amplitude: float, lorentzian_hwhm: f
     Returns the line shape of a single Voigt distribution at 'x'.
     
     Args:
-    ----------
         x : numpy.ndarray
             The x-coordinates at which to compute the Voigt line shape.
         median : float
@@ -56,7 +53,6 @@ def one_voigt(x: np.ndarray, median: float, amplitude: float, lorentzian_hwhm: f
             The offset value of the Voigt function. Defaults to 0.
 
     Returns:
-    ---------
         numpy.ndarray
             The Voigt line shape at 'x'.
 
@@ -75,7 +71,6 @@ def five_voigt(x: np.ndarray, median1: float, amplitude1: float, lorentzian_hwhm
     
        
     Args:
-    ----------
         x : numpy.ndarray
             The x-coordinates at which to compute the Voigt line shape.
         median1-5: float
@@ -90,7 +85,6 @@ def five_voigt(x: np.ndarray, median1: float, amplitude1: float, lorentzian_hwhm
             The offset value of the sum of five Voigt function. Defaults to 0.
 
     Returns:
-    ---------
         numpy.ndarray
             The line shape of five Voigt distributions at 'x'.
 

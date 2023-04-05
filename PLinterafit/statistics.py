@@ -22,7 +22,6 @@ def do_statistics(func, eV, observed, seed, mode, My_maxfav):
     Performs statistical analysis on a given data set using the specified function and the mode of noise distribution.
 
     Args:
-    -----
         func: str
             A callable function representing the fitting model.
         eV: np.array
@@ -65,7 +64,6 @@ def compute_chisquare(observed: np.ndarray, expected: np.ndarray, uncertainty: n
     their uncertainties, and the number of degrees of freedom.
 
     Args:
-    -----
         observed: array
             Observed values.
         expected: array
@@ -96,7 +94,6 @@ def getNDOF(data: np.ndarray, popt: np.ndarray):
     Returns the number of degrees of freedom given a data array and a parameter array.
 
     Args:
-    -----
         data: array 
             Data array.
         popt: array 

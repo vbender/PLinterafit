@@ -101,7 +101,6 @@
 <span class="sd">    Create a slider widget with the given minimum, maximum, and initial values.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        ax: axes</span>
 <span class="sd">            The axes object on which to create the slider.</span>
 <span class="sd">        label: str</span>
@@ -114,7 +113,6 @@
 <span class="sd">            The initial value of the slider.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        slider: Slider</span>
 <span class="sd">            The created slider widget.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -133,14 +131,12 @@
 <span class="sd">    Create a button widget with the given label.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        ax: axes</span>
 <span class="sd">            The axes object on which to create the button.</span>
 <span class="sd">        label: str</span>
 <span class="sd">            The label for the button.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        button: Button</span>
 <span class="sd">            The created button widget.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -156,7 +152,6 @@
 <span class="sd">    Create a group of four sliders for a Voigt profile with the given seed values as seed_temp.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        fig: figure </span>
 <span class="sd">            The figure object on which to create the slider group.</span>
 <span class="sd">        seed_temp: list</span>
@@ -171,7 +166,6 @@
 <span class="sd">            Thickness of the sliders.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    --------</span>
 <span class="sd">        tuple</span>
 <span class="sd">            A tuple of four Slider objects representing the median, amplitude, Lorenzian half-width at half-maximum (HWHM),</span>
 <span class="sd">            and Gaussian HWHM of the Voigt profile, respectively.</span>
@@ -214,7 +208,6 @@
 <span class="sd">    Fit a Voigt function to data using interactive sliders to adjust parameters.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        data : np.array</span>
 <span class="sd">            The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains</span>
 <span class="sd">            the photon energy values and the second column contains the photon counts values.</span>
@@ -234,7 +227,6 @@
 <span class="sd">            The mode of the underlying noise distribution in the data, either &quot;poisson&quot; or &quot;gauss&quot;. Defaults to &quot;poisson&quot;.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    --------</span>
 <span class="sd">        tuple</span>
 <span class="sd">            A tuple containing the fit parameters (median, amplitude, lorentzian_width,</span>
 <span class="sd">            gaussian_width, offset), the standard errors of the fit parameters, the residuals,</span>
@@ -317,7 +309,6 @@
 <span class="sd">    Fit five Voigt functions to data using interactive sliders to adjust parameters.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        data : np.array</span>
 <span class="sd">            The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains</span>
 <span class="sd">            the Photon energy values and the second column contains the Ph0ton counts values.</span>
@@ -337,7 +328,6 @@
 <span class="sd">            The mode of the underlying noise distribution in the data, either &quot;poisson&quot; or &quot;gauss&quot;. Defaults to &quot;poisson&quot;.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        tuple</span>
 <span class="sd">            A tuple containing the fit parameters (median, amplitude, lorentzian_width,</span>
 <span class="sd">            gaussian_width, offset), the standard errors of the fit parameters, the residuals,</span>

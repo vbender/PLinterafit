@@ -19,12 +19,10 @@ def load_CSV_data(datafile: str) -> np.ndarray:
     Load CSV data and return numpy array.
     
     Args:
-    -------
         datafile: str
             File location is given as string.
         
     Returns:
-    ---------
         data: array
             Data array loaded from the file location.
         
@@ -48,12 +46,10 @@ def add_photon_energy(data: np.ndarray) -> np.ndarray:
     Add photon energy computed from vacuum wavelength.
     
     Args:
-    ---------
         data: array
             Data array to be processed.
         
     Returns:
-    ----------
         data: array
             Data array with an additional dimension as photon energy. 
     """
@@ -69,14 +65,12 @@ def subtract_background(data: np.ndarray, background: float) -> np.ndarray:
     Subtract background from data.
     
     Args:
-    -------
         data: array
             Data array to be processed.
         background: float
             Background to be removed.
         
     Returns:
-    -------
         data: array
             Background subtracted data array.
         
@@ -89,14 +83,12 @@ def normalise_data(data: np.ndarray, factor: float) -> np.ndarray:
     Normalise data.
     
     Args:
-    -------
         data: array
             Data array to be normalized.
         factor: float
             Normalization factor.
         
     Returns:
-    --------
         data: array
             Normalized data array.
         
@@ -109,7 +101,6 @@ def load_data(filepath: str, background: float, normalisation: float) -> np.ndar
     Load data files.
     
     Args:
-    -------
         filepath: str
             Filepath given as a string.
         background: float
@@ -118,7 +109,6 @@ def load_data(filepath: str, background: float, normalisation: float) -> np.ndar
             Value by which the data is normalized with.
         
     Returns:
-    ---------
         data: array
             Processed data array: renormalized, background removed, new dimension is added as photon energy.
 
@@ -134,7 +124,6 @@ def get_fit_data(data: np.ndarray, lower_cutoff: float, upper_cutoff: float) -> 
     Return data within the interest range bound by lower_cutoff and upper_cutoff.
     
     Args:
-    ---------
         data: array
             Data array of interest.
         lower_cutoff: float
@@ -143,7 +132,6 @@ def get_fit_data(data: np.ndarray, lower_cutoff: float, upper_cutoff: float) -> 
             Upper cutoff range
         
     Returns:
-    ----------
         data: array
             Data array within the selected cutoff range.
 
@@ -159,12 +147,10 @@ def order_of_magnitude(number: float) -> int:
     Returns the order of magnitude of a given number.
     
     Args:
-    -------
         number: float
             The float value.
 
     Returns:
-    ---------
         integer: 
             The order of magnituge.
     """
@@ -177,19 +163,16 @@ def truncate(number: float, decimals: int = 0) -> float:
     Truncates a float value to a specific number of decimal places.
 
     Args:
-    -------
         number: float
             The float value to truncate.
         decimals: int, optional
             The number of decimal places to keep. Defaults to 0.
 
     Returns:
-    -------
         float: 
             The truncated float value.
 
     Raises:
-    -------
         TypeError: 
             If the decimals argument is not an integer.
         ValueError: 
@@ -211,7 +194,6 @@ def prepare_data_for_stat_test(observed: np.ndarray, expected: np.ndarray, popt:
     and correcting parameters.
 
     Args:
-    -------
         observed: array 
             Observed counts.
         expected: array
@@ -228,7 +210,6 @@ def prepare_data_for_stat_test(observed: np.ndarray, expected: np.ndarray, popt:
             Energy values.
 
     Returns:
-    -------
         expected: array
             Normalized expected counts.
         uncertainty: array
@@ -242,7 +223,6 @@ def prepare_data_for_stat_test(observed: np.ndarray, expected: np.ndarray, popt:
     
     
     Raises:
-    ------
         ValueError: 
             If the mode is invalid.
             If the function_name is invalid.

@@ -92,12 +92,10 @@
 <span class="sd">    Load CSV data and return numpy array.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        datafile: str</span>
 <span class="sd">            File location is given as string.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array loaded from the file location.</span>
 <span class="sd">        </span>
@@ -121,12 +119,10 @@
 <span class="sd">    Add photon energy computed from vacuum wavelength.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array to be processed.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    ----------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array with an additional dimension as photon energy. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -142,14 +138,12 @@
 <span class="sd">    Subtract background from data.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array to be processed.</span>
 <span class="sd">        background: float</span>
 <span class="sd">            Background to be removed.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    -------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Background subtracted data array.</span>
 <span class="sd">        </span>
@@ -162,14 +156,12 @@
 <span class="sd">    Normalise data.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array to be normalized.</span>
 <span class="sd">        factor: float</span>
 <span class="sd">            Normalization factor.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    --------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Normalized data array.</span>
 <span class="sd">        </span>
@@ -182,7 +174,6 @@
 <span class="sd">    Load data files.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        filepath: str</span>
 <span class="sd">            Filepath given as a string.</span>
 <span class="sd">        background: float</span>
@@ -191,7 +182,6 @@
 <span class="sd">            Value by which the data is normalized with.</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Processed data array: renormalized, background removed, new dimension is added as photon energy.</span>
 
@@ -207,7 +197,6 @@
 <span class="sd">    Return data within the interest range bound by lower_cutoff and upper_cutoff.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array of interest.</span>
 <span class="sd">        lower_cutoff: float</span>
@@ -216,7 +205,6 @@
 <span class="sd">            Upper cutoff range</span>
 <span class="sd">        </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    ----------</span>
 <span class="sd">        data: array</span>
 <span class="sd">            Data array within the selected cutoff range.</span>
 
@@ -232,12 +220,10 @@
 <span class="sd">    Returns the order of magnitude of a given number.</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        number: float</span>
 <span class="sd">            The float value.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    ---------</span>
 <span class="sd">        integer: </span>
 <span class="sd">            The order of magnituge.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -250,19 +236,16 @@
 <span class="sd">    Truncates a float value to a specific number of decimal places.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        number: float</span>
 <span class="sd">            The float value to truncate.</span>
 <span class="sd">        decimals: int, optional</span>
 <span class="sd">            The number of decimal places to keep. Defaults to 0.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    -------</span>
 <span class="sd">        float: </span>
 <span class="sd">            The truncated float value.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">    -------</span>
 <span class="sd">        TypeError: </span>
 <span class="sd">            If the decimals argument is not an integer.</span>
 <span class="sd">        ValueError: </span>
@@ -284,7 +267,6 @@
 <span class="sd">    and correcting parameters.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">    -------</span>
 <span class="sd">        observed: array </span>
 <span class="sd">            Observed counts.</span>
 <span class="sd">        expected: array</span>
@@ -301,7 +283,6 @@
 <span class="sd">            Energy values.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    -------</span>
 <span class="sd">        expected: array</span>
 <span class="sd">            Normalized expected counts.</span>
 <span class="sd">        uncertainty: array</span>
@@ -315,7 +296,6 @@
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    Raises:</span>
-<span class="sd">    ------</span>
 <span class="sd">        ValueError: </span>
 <span class="sd">            If the mode is invalid.</span>
 <span class="sd">            If the function_name is invalid.</span>

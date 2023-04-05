@@ -28,7 +28,6 @@ def create_slider(ax, label, valmin: float, valmax: float, valinit) -> Slider:
     Create a slider widget with the given minimum, maximum, and initial values.
 
     Args:
-    -------
         ax: axes
             The axes object on which to create the slider.
         label: str
@@ -41,7 +40,6 @@ def create_slider(ax, label, valmin: float, valmax: float, valinit) -> Slider:
             The initial value of the slider.
 
     Returns:
-    ---------
         slider: Slider
             The created slider widget.
     """
@@ -60,14 +58,12 @@ def create_button(ax, label)-> Button:
     Create a button widget with the given label.
 
     Args:
-    -------
         ax: axes
             The axes object on which to create the button.
         label: str
             The label for the button.
 
     Returns:
-    ---------
         button: Button
             The created button widget.
     """
@@ -83,7 +79,6 @@ def create_slider_group_voigt(fig, seed_temp, update, voigt_order, position_yaxi
     Create a group of four sliders for a Voigt profile with the given seed values as seed_temp.
 
     Args:
-    -------
         fig: figure 
             The figure object on which to create the slider group.
         seed_temp: list
@@ -98,7 +93,6 @@ def create_slider_group_voigt(fig, seed_temp, update, voigt_order, position_yaxi
             Thickness of the sliders.
 
     Returns:
-    --------
         tuple
             A tuple of four Slider objects representing the median, amplitude, Lorenzian half-width at half-maximum (HWHM),
             and Gaussian HWHM of the Voigt profile, respectively.
@@ -141,7 +135,6 @@ def fit_one_voigt(data: np.array, median: float, amplitude: float, lorentzian_hw
     Fit a Voigt function to data using interactive sliders to adjust parameters.
     
     Args:
-    -------
         data : np.array
             The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains
             the photon energy values and the second column contains the photon counts values.
@@ -161,7 +154,6 @@ def fit_one_voigt(data: np.array, median: float, amplitude: float, lorentzian_hw
             The mode of the underlying noise distribution in the data, either "poisson" or "gauss". Defaults to "poisson".
 
     Returns:
-    --------
         tuple
             A tuple containing the fit parameters (median, amplitude, lorentzian_width,
             gaussian_width, offset), the standard errors of the fit parameters, the residuals,
@@ -244,7 +236,6 @@ def fit_five_voigts(data: np.array, median1: float, amplitude1: float, lorentzia
     Fit five Voigt functions to data using interactive sliders to adjust parameters.
     
     Args:
-    -------
         data : np.array
             The data to fit, with shape (n, 3), where the zeroth collumn contains the wavelength values, the first column contains
             the Photon energy values and the second column contains the Ph0ton counts values.
@@ -264,7 +255,6 @@ def fit_five_voigts(data: np.array, median1: float, amplitude1: float, lorentzia
             The mode of the underlying noise distribution in the data, either "poisson" or "gauss". Defaults to "poisson".
 
     Returns:
-    ---------
         tuple
             A tuple containing the fit parameters (median, amplitude, lorentzian_width,
             gaussian_width, offset), the standard errors of the fit parameters, the residuals,
