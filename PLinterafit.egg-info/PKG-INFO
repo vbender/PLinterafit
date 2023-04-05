@@ -5,17 +5,18 @@ Summary: This is a package for Voigt fitting of a photolumiscence spectrum and s
 Home-page: https://github.com/pypa/sampleproject
 Author: Viktor Bender, Bayarjargal N.Tugchin
 Author-email: vbender@physik.hu-berlin.de, n.bayarjargal@uni-jena.de
+License: UNKNOWN
+Description: # PLinterafit Library Package
+        
+        PLinterafit
+        ============
+        
+        This is the PLinterafit library package to see the full documentation please visit https://vbender.github.io/PLinterafit/
+        
 Keywords: PL spectra fitting
+Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
-License-File: LICENSE.txt
-
-# PLinterafit Library Package
-
-PLinterafit
-============
-
-This is the PLinterafit library package to see the full documentation navigate to ../docs/_build/html/PLinterafit.html

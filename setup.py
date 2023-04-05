@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="PLinterafit",
-    version="0.0.1",
+    version="0.0.2",
     author="Viktor Bender, Bayarjargal N.Tugchin",
     author_email="vbender@physik.hu-berlin.de, n.bayarjargal@uni-jena.de",
     description="This is a package for Voigt fitting of a photolumiscence spectrum and statistically evaluating the fitting results.",
