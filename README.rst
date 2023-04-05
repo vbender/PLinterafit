@@ -2,6 +2,7 @@ PLinterafit
 ============
 
 .. image:: https://img.shields.io/pypi/v/PLinterafit
+   :target: https://pypi.org/project/PLinterafit/
    :alt: PyPI
 
 
