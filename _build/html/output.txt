@@ -1,1 +1,0 @@
-installation.rst:10: [redirected permanently] http://www.pypi.org/ to https://pypi.org/
