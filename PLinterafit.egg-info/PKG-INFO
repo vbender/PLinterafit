@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: PLinterafit
-Version: 0.0.1
+Version: 0.0.2
 Summary: This is a package for Voigt fitting of a photolumiscence spectrum and statistically evaluating the fitting results.
 Home-page: https://github.com/pypa/sampleproject
 Author: Viktor Bender, Bayarjargal N.Tugchin
